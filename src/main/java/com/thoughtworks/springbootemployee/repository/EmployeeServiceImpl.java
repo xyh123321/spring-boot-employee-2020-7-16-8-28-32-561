@@ -1,15 +1,20 @@
 package com.thoughtworks.springbootemployee.repository;
 
+import com.thoughtworks.springbootemployee.entity.Company;
 import com.thoughtworks.springbootemployee.entity.Employee;
 import com.thoughtworks.springbootemployee.service.EmployeeService;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class EmployeeServiceImpl implements EmployeeService {
     private List<Employee> employees = new ArrayList<>();
+    private Map<Company, List<Employee>> relationship= new HashMap<>();
+    private Company company;
 
     public List<Employee> getEmployees() {
         return employees;
@@ -25,6 +30,9 @@ public class EmployeeServiceImpl implements EmployeeService {
                 .findFirst()
                 .orElse(null) == null){
             employees.add(employee);
+        }
+        if(!(relationship.containsValue(employees))){
+            relationship.get(company).add(employee);
         }
     }
 
