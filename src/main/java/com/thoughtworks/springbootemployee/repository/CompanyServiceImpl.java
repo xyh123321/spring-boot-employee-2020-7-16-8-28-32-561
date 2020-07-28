@@ -54,5 +54,12 @@ public class CompanyServiceImpl implements CompanyService {
         companyList.stream().filter(e -> e.getId() == id).findFirst().ifPresent(company -> relationship.getAllEmployees(company).clear());
     }
 
+    @Override
+    public void updateCompany(int id, Company company) {
+        Company originCompany = companyList.stream().filter(dataBaseCompany -> company.getId() == dataBaseCompany.getId()).findFirst().orElse(null);
+        companyList.remove(originCompany);
+        companyList.add(company);
+    }
+
 
 }

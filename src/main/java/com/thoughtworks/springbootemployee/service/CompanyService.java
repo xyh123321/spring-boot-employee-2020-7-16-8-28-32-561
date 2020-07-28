@@ -18,4 +18,6 @@ public interface CompanyService {
     void addCompany(Company company);
 
     void deleteAllEmployeesOfCompany(int id);
+
+    void updateCompany(int id, Company company);
 }
