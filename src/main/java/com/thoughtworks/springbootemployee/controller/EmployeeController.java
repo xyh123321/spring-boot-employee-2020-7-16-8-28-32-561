@@ -34,4 +34,9 @@ public class EmployeeController {
         }
         return employeeServiceImpl.getMaleEmployees(gender);
     }
+
+    @PutMapping("/employees/{id}")
+    public void updateEmployees(@PathVariable("id") int id, @RequestBody Employee employee){
+        employeeServiceImpl.updateEmployees(id, employee);
+    }
 }

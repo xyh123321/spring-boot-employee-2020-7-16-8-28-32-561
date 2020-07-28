@@ -44,4 +44,9 @@ public class EmployeeServiceImpl implements EmployeeService {
         }
         return maleEmployees;
     }
+
+    public void updateEmployees(int id, Employee employee) {
+        deleteEmployees(id);
+        addEmployees(employee);
+    }
 }
