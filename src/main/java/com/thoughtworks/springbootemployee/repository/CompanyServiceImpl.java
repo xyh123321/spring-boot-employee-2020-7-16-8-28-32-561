@@ -7,14 +7,15 @@ import com.thoughtworks.springbootemployee.service.CompanyService;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 @Service
 public class CompanyServiceImpl implements CompanyService {
 
     List<Company> companyList = new ArrayList<>();
-    Relationship relationship = new Relationship();
 
     @Override
     public List<Company> getAllCompanies() {
@@ -29,7 +30,7 @@ public class CompanyServiceImpl implements CompanyService {
     @Override
     public List<Employee> getAllEmployeesOfCompany(int id) {
         Company company = getCompany(id);
-        return relationship.getAllEmployees(company);
+        return company.getEmployeeList();
     }
 
     @Override
@@ -43,4 +44,21 @@ public class CompanyServiceImpl implements CompanyService {
             companyList.add(company);
         }
     }
+
+    @Override
+    public void deleteAllEmployeesOfCompany(int id) {
+        companyList.stream().filter(e -> e.getId() == id).findFirst().ifPresent(company -> company.getEmployeeList().clear());
+    }
+
+    @Override
+    public void updateCompany(int id, Company company) {
+        Company originCompany = companyList.stream().filter(dataBaseCompany -> company.getId() == dataBaseCompany.getId()).findFirst().orElse(null);
+        if(originCompany !=null){
+            companyList.remove(originCompany);
+            companyList.add(company);
+        }
+
+    }
+
+
 }
