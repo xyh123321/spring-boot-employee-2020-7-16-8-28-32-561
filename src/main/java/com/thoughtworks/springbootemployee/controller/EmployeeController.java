@@ -27,16 +27,21 @@ public class EmployeeController {
         employeeServiceImpl.deleteEmployees(id);
     }
 
-    @RequestMapping("/employees")
-    public List<Employee> getMaleEmployees(@RequestParam(value = "gender", required = false, defaultValue = "") String gender){
-        if("".equals(gender)){
-            return employeeServiceImpl.getEmployees();
-        }
-        return employeeServiceImpl.getMaleEmployees(gender);
-    }
-
     @PutMapping("/employees/{id}")
     public void updateEmployees(@PathVariable("id") int id, @RequestBody Employee employee){
         employeeServiceImpl.updateEmployees(id, employee);
+    }
+
+    @RequestMapping("/employees")
+    public List<Employee> pagingQueryEmployees(@RequestParam(value = "page", required = false, defaultValue = "0") int page
+            , @RequestParam(value = "pagesize", required = false,defaultValue = "0") int pageSize
+            , @RequestParam(value = "gender", required = false, defaultValue = "") String gender){
+        if(!("".equals(gender))){
+            return employeeServiceImpl.getMaleEmployees(gender);
+        }
+        if(page != 0 && pageSize !=0){
+            employeeServiceImpl.pagingQueryEmployees(page, pageSize);
+        }
+        return employeeServiceImpl.getEmployees();
     }
 }

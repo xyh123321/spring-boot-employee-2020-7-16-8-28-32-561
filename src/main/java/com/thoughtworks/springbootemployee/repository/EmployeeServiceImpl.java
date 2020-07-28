@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 @Service
 public class EmployeeServiceImpl implements EmployeeService {
@@ -31,9 +32,9 @@ public class EmployeeServiceImpl implements EmployeeService {
                 .orElse(null) == null){
             employees.add(employee);
         }
-        if(!(relationship.containsValue(employees))){
-            relationship.get(company).add(employee);
-        }
+//        if(!(relationship.containsValue(employees))){
+//            relationship.get(company).add(employee);
+//        }
     }
 
     public void deleteEmployees(int id) {
@@ -56,5 +57,9 @@ public class EmployeeServiceImpl implements EmployeeService {
     public void updateEmployees(int id, Employee employee) {
         deleteEmployees(id);
         addEmployees(employee);
+    }
+
+    public List<Employee> pagingQueryEmployees(int page, int pageSize) {
+        return employees.stream().skip((page-1)*pageSize).limit(pageSize).collect(Collectors.toList());
     }
 }
