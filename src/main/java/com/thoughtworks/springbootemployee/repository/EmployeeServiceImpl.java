@@ -35,4 +35,13 @@ public class EmployeeServiceImpl implements EmployeeService {
                 .orElse(null));
     }
 
+    public List<Employee> getMaleEmployees(String gender) {
+        List<Employee> maleEmployees = new ArrayList<>();
+        for (Employee employee : employees) {
+            if (employee.getGender().equals("male")) {
+                maleEmployees.add(employee);
+            }
+        }
+        return maleEmployees;
+    }
 }

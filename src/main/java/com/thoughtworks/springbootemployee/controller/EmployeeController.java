@@ -12,11 +12,6 @@ public class EmployeeController {
     @Autowired
     EmployeeServiceImpl employeeServiceImpl;
 
-    @GetMapping("/employees")
-    public List<Employee> getAllEmployees(){
-        return employeeServiceImpl.getEmployees();
-    }
-
     @GetMapping("/employees/{id}")
     public Employee getSpecificEmployee(@RequestParam("id") int id){
         return employeeServiceImpl.getSpecificEmployee(id);
@@ -30,5 +25,13 @@ public class EmployeeController {
     @DeleteMapping("/employees/{id}")
     public void deleteEmployees(@PathVariable("id") int id){
         employeeServiceImpl.deleteEmployees(id);
+    }
+
+    @RequestMapping("/employees")
+    public List<Employee> getMaleEmployees(@RequestParam(value = "gender", required = false, defaultValue = "") String gender){
+        if("".equals(gender)){
+            return employeeServiceImpl.getEmployees();
+        }
+        return employeeServiceImpl.getMaleEmployees(gender);
     }
 }
