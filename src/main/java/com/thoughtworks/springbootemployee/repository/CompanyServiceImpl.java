@@ -36,4 +36,11 @@ public class CompanyServiceImpl implements CompanyService {
     public List<Company> pagingQueryCompanies(int page, int pageSize) {
         return companyList.stream().skip((page-1)*pageSize).limit(pageSize).collect(Collectors.toList());
     }
+
+    @Override
+    public void addCompany(Company company) {
+        if(companyList.stream().filter(dataBaseCompany -> company.getId() == dataBaseCompany.getId()).findFirst().orElse(null) == null){
+            companyList.add(company);
+        }
+    }
 }
