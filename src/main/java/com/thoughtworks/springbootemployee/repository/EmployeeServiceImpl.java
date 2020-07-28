@@ -14,4 +14,8 @@ public class EmployeeServiceImpl implements EmployeeService {
     public List<Employee> getEmployees() {
         return employees;
     }
+
+    public Employee getSpecificEmployee(int id) {
+        return employees.get(id);
+    }
 }

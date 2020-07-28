@@ -16,4 +16,9 @@ public class EmployeeController {
     public List<Employee> getAllEmployees(){
         return employeeServiceImpl.getEmployees();
     }
+
+    @GetMapping("/employees/{id}")
+    public Employee getSpecificEmployee(@RequestParam("id") int id){
+        return employeeServiceImpl.getSpecificEmployee(id);
+    }
 }
