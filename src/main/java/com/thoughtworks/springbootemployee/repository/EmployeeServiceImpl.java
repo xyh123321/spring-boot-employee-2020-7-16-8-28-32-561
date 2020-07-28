@@ -18,4 +18,13 @@ public class EmployeeServiceImpl implements EmployeeService {
     public Employee getSpecificEmployee(int id) {
         return employees.get(id);
     }
+
+    public void addEmployees(Employee employee) {
+        if(employees.stream()
+                .filter(newEmployee -> employee.getId() == newEmployee.getId())
+                .findFirst()
+                .orElse(null) == null){
+            employees.add(employee);
+        }
+    }
 }

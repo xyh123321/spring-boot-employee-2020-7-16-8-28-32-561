@@ -21,4 +21,9 @@ public class EmployeeController {
     public Employee getSpecificEmployee(@RequestParam("id") int id){
         return employeeServiceImpl.getSpecificEmployee(id);
     }
+
+    @PostMapping("/employees")
+    public void addEmployees(@RequestBody Employee employee){
+        employeeServiceImpl.addEmployees(employee);
+    }
 }
