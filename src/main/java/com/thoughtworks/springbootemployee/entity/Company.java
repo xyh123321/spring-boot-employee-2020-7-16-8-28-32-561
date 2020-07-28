@@ -1,5 +1,8 @@
 package com.thoughtworks.springbootemployee.entity;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Company {
     private String companyName;
     private int id;
@@ -19,4 +22,5 @@ public class Company {
     public void setId(int id) {
         this.id = id;
     }
+
 }
