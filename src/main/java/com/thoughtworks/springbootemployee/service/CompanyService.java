@@ -16,4 +16,6 @@ public interface CompanyService {
     List<Company> pagingQueryCompanies(int page, int pageSize);
 
     void addCompany(Company company);
+
+    void deleteAllEmployeesOfCompany(int id);
 }

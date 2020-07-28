@@ -7,7 +7,9 @@ import com.thoughtworks.springbootemployee.service.CompanyService;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 @Service
@@ -39,8 +41,21 @@ public class CompanyServiceImpl implements CompanyService {
 
     @Override
     public void addCompany(Company company) {
+        Map<Company, List<Employee>> map = new HashMap<>();
         if(companyList.stream().filter(dataBaseCompany -> company.getId() == dataBaseCompany.getId()).findFirst().orElse(null) == null){
             companyList.add(company);
+            map.put(company,new ArrayList<>());
+            relationship.setRelation(map);
         }
     }
+
+    @Override
+    public void deleteAllEmployeesOfCompany(int id) {
+        Company company = companyList.stream().filter(e -> e.getId() == id).findFirst().orElse(null);
+        if(company != null) {
+            relationship.getAllEmployees(company).clear();
+        }
+    }
+
+
 }
