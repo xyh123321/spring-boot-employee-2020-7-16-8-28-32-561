@@ -15,4 +15,9 @@ public class CompanyServiceImpl implements CompanyService {
     public List<Company> getAllCompanies() {
         return companyList;
     }
+
+    @Override
+    public Company getCompany(int id) {
+        return companyList.stream().filter(company -> company.getId() == id).findFirst().orElse(null);
+    }
 }
