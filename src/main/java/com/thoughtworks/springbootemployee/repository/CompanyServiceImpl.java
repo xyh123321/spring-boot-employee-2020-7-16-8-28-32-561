@@ -51,10 +51,7 @@ public class CompanyServiceImpl implements CompanyService {
 
     @Override
     public void deleteAllEmployeesOfCompany(int id) {
-        Company company = companyList.stream().filter(e -> e.getId() == id).findFirst().orElse(null);
-        if(company != null) {
-            relationship.getAllEmployees(company).clear();
-        }
+        companyList.stream().filter(e -> e.getId() == id).findFirst().ifPresent(company -> relationship.getAllEmployees(company).clear());
     }
 
 
