@@ -16,7 +16,6 @@ import java.util.stream.Collectors;
 public class CompanyServiceImpl implements CompanyService {
 
     List<Company> companyList = new ArrayList<>();
-    Relationship relationship = new Relationship();
 
     @Override
     public List<Company> getAllCompanies() {
@@ -31,7 +30,7 @@ public class CompanyServiceImpl implements CompanyService {
     @Override
     public List<Employee> getAllEmployeesOfCompany(int id) {
         Company company = getCompany(id);
-        return relationship.getAllEmployees(company);
+        return company.getEmployeeList();
     }
 
     @Override
@@ -41,24 +40,24 @@ public class CompanyServiceImpl implements CompanyService {
 
     @Override
     public void addCompany(Company company) {
-        Map<Company, List<Employee>> map = new HashMap<>();
         if(companyList.stream().filter(dataBaseCompany -> company.getId() == dataBaseCompany.getId()).findFirst().orElse(null) == null){
             companyList.add(company);
-            map.put(company,new ArrayList<>());
-            relationship.setRelation(map);
         }
     }
 
     @Override
     public void deleteAllEmployeesOfCompany(int id) {
-        companyList.stream().filter(e -> e.getId() == id).findFirst().ifPresent(company -> relationship.getAllEmployees(company).clear());
+        companyList.stream().filter(e -> e.getId() == id).findFirst().ifPresent(company -> company.getEmployeeList().clear());
     }
 
     @Override
     public void updateCompany(int id, Company company) {
         Company originCompany = companyList.stream().filter(dataBaseCompany -> company.getId() == dataBaseCompany.getId()).findFirst().orElse(null);
-        companyList.remove(originCompany);
-        companyList.add(company);
+        if(originCompany !=null){
+            companyList.remove(originCompany);
+            companyList.add(company);
+        }
+
     }
 
 
