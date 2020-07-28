@@ -12,4 +12,6 @@ public interface CompanyService {
     Company getCompany(int id);
 
     List<Employee> getAllEmployeesOfCompany(int id);
+
+    List<Company> pagingQueryCompanies(int page, int pageSize);
 }
