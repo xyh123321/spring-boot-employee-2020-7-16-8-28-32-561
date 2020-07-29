@@ -27,8 +27,11 @@ public class CompanyController {
         return companyService.getAllEmployeesOfCompany(id);
     }
 
-    @GetMapping("/companies")
-    private Page<Company> queryCompanies(@PageableDefault(size = 2) Pageable pageable) {
+    @GetMapping(value = "/companies")
+    private List<Company> queryCompanies(@PageableDefault(size = 2) Pageable pageable,@RequestParam(defaultValue = "false",required = false) boolean unpaged) {
+        if(unpaged){
+            return companyService.getAllCompanies();
+        }
         return companyService.pagingQueryCompanies(pageable);
     }
 

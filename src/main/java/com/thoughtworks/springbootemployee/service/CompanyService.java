@@ -15,7 +15,7 @@ public interface CompanyService {
 
     List<Employee> getAllEmployeesOfCompany(int id);
 
-    Page<Company> pagingQueryCompanies(Pageable pageable);
+    List<Company> pagingQueryCompanies(Pageable pageable);
 
     boolean addCompany(Company company);
 
