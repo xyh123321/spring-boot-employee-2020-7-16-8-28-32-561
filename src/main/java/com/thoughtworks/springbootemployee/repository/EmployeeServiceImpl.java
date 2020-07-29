@@ -14,7 +14,7 @@ import java.util.stream.Collectors;
 @Service
 public class EmployeeServiceImpl implements EmployeeService {
     private List<Employee> employees = new ArrayList<>();
-    private Map<Company, List<Employee>> relationship= new HashMap<>();
+    private Map<Company, List<Employee>> relationship = new HashMap<>();
     private Company company;
 
     public List<Employee> getEmployees() {
@@ -26,10 +26,10 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
 
     public void addEmployees(Employee employee) {
-        if(employees.stream()
+        if (employees.stream()
                 .filter(newEmployee -> employee.getId() == newEmployee.getId())
                 .findFirst()
-                .orElse(null) == null){
+                .orElse(null) == null) {
             employees.add(employee);
         }
 //        if(!(relationship.containsValue(employees))){
@@ -60,6 +60,6 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
 
     public List<Employee> pagingQueryEmployees(int page, int pageSize) {
-        return employees.stream().skip((page-1)*pageSize).limit(pageSize).collect(Collectors.toList());
+        return employees.stream().skip((page - 1) * pageSize).limit(pageSize).collect(Collectors.toList());
     }
 }

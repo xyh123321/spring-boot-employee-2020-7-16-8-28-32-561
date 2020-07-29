@@ -2,14 +2,11 @@ package com.thoughtworks.springbootemployee.repository;
 
 import com.thoughtworks.springbootemployee.entity.Company;
 import com.thoughtworks.springbootemployee.entity.Employee;
-import com.thoughtworks.springbootemployee.entity.Relationship;
 import com.thoughtworks.springbootemployee.service.CompanyService;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.stream.Collectors;
 
 @Service
@@ -35,12 +32,12 @@ public class CompanyServiceImpl implements CompanyService {
 
     @Override
     public List<Company> pagingQueryCompanies(int page, int pageSize) {
-        return companyList.stream().skip((page-1)*pageSize).limit(pageSize).collect(Collectors.toList());
+        return companyList.stream().skip((page - 1) * pageSize).limit(pageSize).collect(Collectors.toList());
     }
 
     @Override
     public void addCompany(Company company) {
-        if(companyList.stream().filter(dataBaseCompany -> company.getId() == dataBaseCompany.getId()).findFirst().orElse(null) == null){
+        if (companyList.stream().filter(dataBaseCompany -> company.getId() == dataBaseCompany.getId()).findFirst().orElse(null) == null) {
             companyList.add(company);
         }
     }
@@ -53,7 +50,7 @@ public class CompanyServiceImpl implements CompanyService {
     @Override
     public void updateCompany(int id, Company company) {
         Company originCompany = companyList.stream().filter(dataBaseCompany -> company.getId() == dataBaseCompany.getId()).findFirst().orElse(null);
-        if(originCompany !=null){
+        if (originCompany != null) {
             companyList.remove(originCompany);
             companyList.add(company);
         }

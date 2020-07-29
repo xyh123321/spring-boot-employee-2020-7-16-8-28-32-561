@@ -13,33 +13,33 @@ public class EmployeeController {
     EmployeeServiceImpl employeeServiceImpl;
 
     @GetMapping("/employees/{id}")
-    public Employee getSpecificEmployee(@RequestParam("id") int id){
+    public Employee getSpecificEmployee(@RequestParam("id") int id) {
         return employeeServiceImpl.getSpecificEmployee(id);
     }
 
     @PostMapping("/employees")
-    public void addEmployees(@RequestBody Employee employee){
+    public void addEmployees(@RequestBody Employee employee) {
         employeeServiceImpl.addEmployees(employee);
     }
 
     @DeleteMapping("/employees/{id}")
-    public void deleteEmployees(@PathVariable("id") int id){
+    public void deleteEmployees(@PathVariable("id") int id) {
         employeeServiceImpl.deleteEmployees(id);
     }
 
     @PutMapping("/employees/{id}")
-    public void updateEmployees(@PathVariable("id") int id, @RequestBody Employee employee){
+    public void updateEmployees(@PathVariable("id") int id, @RequestBody Employee employee) {
         employeeServiceImpl.updateEmployees(id, employee);
     }
 
     @RequestMapping("/employees")
     public List<Employee> pagingQueryEmployees(@RequestParam(value = "page", required = false, defaultValue = "0") int page
-            , @RequestParam(value = "pagesize", required = false,defaultValue = "0") int pageSize
-            , @RequestParam(value = "gender", required = false, defaultValue = "") String gender){
-        if(!("".equals(gender))){
+            , @RequestParam(value = "pagesize", required = false, defaultValue = "0") int pageSize
+            , @RequestParam(value = "gender", required = false, defaultValue = "") String gender) {
+        if (!("".equals(gender))) {
             return employeeServiceImpl.getMaleEmployees(gender);
         }
-        if(page != 0 && pageSize !=0){
+        if (page != 0 && pageSize != 0) {
             employeeServiceImpl.pagingQueryEmployees(page, pageSize);
         }
         return employeeServiceImpl.getEmployees();
