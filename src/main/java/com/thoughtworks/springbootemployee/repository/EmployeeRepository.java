@@ -1,10 +1,9 @@
 package com.thoughtworks.springbootemployee.repository;
 
-import com.thoughtworks.springbootemployee.entity.Company;
+import com.thoughtworks.springbootemployee.entity.Employee;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface CompanyRepository extends JpaRepository<Company,Integer> {
-
+public interface EmployeeRepository extends JpaRepository<Employee, Integer> {
 }
