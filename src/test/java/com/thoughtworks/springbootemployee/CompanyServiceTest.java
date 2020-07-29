@@ -37,5 +37,18 @@ public class CompanyServiceTest {
         assertEquals(companyID, specifyCompany.getId());
     }
 
+    @Test
+    void should_return_true_when_add_a_company_given_a_company() {
+        //given
+        int companyId = 1;
+        Company company = new Company();
+        company.setId(companyId);
+        Mockito.when(companyRepository.addCompany(company)).thenReturn(true);
 
+        //when
+        boolean result = companyService.addCompany(company);
+
+        //then
+        assertEquals(true, result);
+    }
 }

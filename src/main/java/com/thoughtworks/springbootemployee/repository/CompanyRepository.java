@@ -7,4 +7,5 @@ import org.springframework.stereotype.Repository;
 public interface CompanyRepository {
     Company getCompany(int id);
 
+    boolean addCompany(Company company);
 }

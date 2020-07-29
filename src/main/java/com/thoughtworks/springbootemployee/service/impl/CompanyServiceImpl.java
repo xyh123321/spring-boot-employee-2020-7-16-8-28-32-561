@@ -42,10 +42,9 @@ public class CompanyServiceImpl implements CompanyService {
     }
 
     @Override
-    public void addCompany(Company company) {
-        if (companyList.stream().filter(dataBaseCompany -> company.getId() == dataBaseCompany.getId()).findFirst().orElse(null) == null) {
-            companyList.add(company);
-        }
+    public boolean addCompany(Company company) {
+
+        return false;
     }
 
     @Override
