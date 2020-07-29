@@ -53,8 +53,9 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
 
     public void updateEmployees(int id, Employee employee) {
-        deleteEmployees(id);
-        addEmployees(employee);
+//        deleteEmployees(id);
+//        addEmployees(employee);
+        employeeRepository.save(employee);
     }
 
 
