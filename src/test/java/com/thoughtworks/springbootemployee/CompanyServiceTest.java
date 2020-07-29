@@ -10,6 +10,9 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 
@@ -17,7 +20,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class CompanyServiceTest {
 
     @Mock
-    CompanyRepository companyRepository = Mockito.mock(CompanyRepository.class);
+    CompanyRepository companyRepository;
 
     @InjectMocks
     CompanyServiceImpl companyService;
@@ -50,5 +53,28 @@ public class CompanyServiceTest {
 
         //then
         assertEquals(true, result);
+    }
+
+
+
+
+
+
+
+    @Test
+    void should_return_companies_when_get_all_companies_given_a_company_repository() {
+        //given
+        List<Company> companies = new ArrayList<>();
+        for(int index = 0; index < 2; index++){
+            companies.add(new Company());
+        }
+        Mockito.when(companyRepository.getAllCompanies()).thenReturn(companies);
+
+        //when
+        List<Company> companiesReslut = companyService.getAllCompanies();
+
+        //then
+        assertEquals(companies, companiesReslut);
+
     }
 }
