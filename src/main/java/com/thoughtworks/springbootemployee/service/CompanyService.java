@@ -2,6 +2,8 @@ package com.thoughtworks.springbootemployee.service;
 
 import com.thoughtworks.springbootemployee.entity.Company;
 import com.thoughtworks.springbootemployee.entity.Employee;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
 import java.util.List;
 
@@ -13,7 +15,7 @@ public interface CompanyService {
 
     List<Employee> getAllEmployeesOfCompany(int id);
 
-    List<Company> pagingQueryCompanies(int page, int pageSize);
+    Page<Company> pagingQueryCompanies(Pageable pageable);
 
     boolean addCompany(Company company);
 

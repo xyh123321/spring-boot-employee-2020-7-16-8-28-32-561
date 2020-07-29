@@ -4,6 +4,9 @@ import com.thoughtworks.springbootemployee.entity.Company;
 import com.thoughtworks.springbootemployee.entity.Employee;
 import com.thoughtworks.springbootemployee.service.impl.CompanyServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -25,9 +28,8 @@ public class CompanyController {
     }
 
     @GetMapping("/companies")
-    private List<Company> queryCompanies(@RequestParam(value = "page", required = false, defaultValue = "0") int page,
-                                         @RequestParam(value = "pageSize", required = false, defaultValue = "0") int pageSize) {
-        return companyService.getAllCompanies();
+    private Page<Company> queryCompanies(@PageableDefault(size = 2) Pageable pageable) {
+        return companyService.pagingQueryCompanies(pageable);
     }
 
     @PostMapping("/companies")

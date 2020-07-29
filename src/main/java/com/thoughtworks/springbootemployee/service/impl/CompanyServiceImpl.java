@@ -6,11 +6,12 @@ import com.thoughtworks.springbootemployee.exception.CompanyNotFoundException;
 import com.thoughtworks.springbootemployee.repository.CompanyRepository;
 import com.thoughtworks.springbootemployee.service.CompanyService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 public class CompanyServiceImpl implements CompanyService {
@@ -41,8 +42,8 @@ public class CompanyServiceImpl implements CompanyService {
     }
 
     @Override
-    public List<Company> pagingQueryCompanies(int page, int pageSize) {
-        return companyList.stream().skip((page - 1) * pageSize).limit(pageSize).collect(Collectors.toList());
+    public Page<Company> pagingQueryCompanies(Pageable pageable) {
+        return companyRepository.findAll(pageable);
     }
 
     @Override
