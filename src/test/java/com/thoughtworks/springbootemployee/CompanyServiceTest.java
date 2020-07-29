@@ -30,14 +30,14 @@ public class CompanyServiceTest {
         //given
         int companyID = 1;
         Company company = new Company();
-        company.setId(1);
-        Mockito.when(companyRepository.getCompany(companyID)).thenReturn(company);
+        company.setCompanyID(companyID);
+        Mockito.when(companyRepository.findById(companyID)).thenReturn(java.util.Optional.of(company));
 
         //when
         Company specifyCompany = companyService.getCompany(companyID);
 
         //then
-        assertEquals(companyID, specifyCompany.getId());
+        assertEquals(companyID, specifyCompany.getCompanyID());
     }
 
     @Test
@@ -45,8 +45,8 @@ public class CompanyServiceTest {
         //given
         int companyId = 1;
         Company company = new Company();
-        company.setId(companyId);
-        Mockito.when(companyRepository.addCompany(company)).thenReturn(true);
+        company.setCompanyID(companyId);
+        Mockito.when(companyRepository.save(company)).thenReturn(company);
 
         //when
         boolean result = companyService.addCompany(company);
@@ -68,7 +68,7 @@ public class CompanyServiceTest {
         for(int index = 0; index < 2; index++){
             companies.add(new Company());
         }
-        Mockito.when(companyRepository.getAllCompanies()).thenReturn(companies);
+        Mockito.when(companyRepository.findAll()).thenReturn(companies);
 
         //when
         List<Company> companiesReslut = companyService.getAllCompanies();
@@ -77,4 +77,5 @@ public class CompanyServiceTest {
         assertEquals(companies, companiesReslut);
 
     }
+
 }

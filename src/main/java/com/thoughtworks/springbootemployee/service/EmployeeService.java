@@ -1,7 +1,8 @@
 package com.thoughtworks.springbootemployee.service;
 
 import com.thoughtworks.springbootemployee.entity.Employee;
-
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import java.util.List;
 
 public interface EmployeeService {
@@ -17,5 +18,6 @@ public interface EmployeeService {
 
     void updateEmployees(int id, Employee employee);
 
-    List<Employee> pagingQueryEmployees(int page, int pageSize);
+//    List<Employee> pagingQueryEmployees(int page, int pageSize);
+Page<Employee> pagingQueryEmployees(Pageable pageable);
 }

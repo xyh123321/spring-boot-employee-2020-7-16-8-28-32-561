@@ -27,9 +27,6 @@ public class CompanyController {
     @GetMapping("/companies")
     private List<Company> queryCompanies(@RequestParam(value = "page", required = false, defaultValue = "0") int page,
                                          @RequestParam(value = "pageSize", required = false, defaultValue = "0") int pageSize) {
-        if (page != 0 && pageSize != 0) {
-            return companyService.pagingQueryCompanies(page, pageSize);
-        }
         return companyService.getAllCompanies();
     }
 

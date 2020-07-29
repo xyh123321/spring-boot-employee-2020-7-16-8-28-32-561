@@ -2,6 +2,7 @@ package com.thoughtworks.springbootemployee.service.impl;
 
 import com.thoughtworks.springbootemployee.entity.Company;
 import com.thoughtworks.springbootemployee.entity.Employee;
+import com.thoughtworks.springbootemployee.exception.CompanyNotFoundException;
 import com.thoughtworks.springbootemployee.repository.CompanyRepository;
 import com.thoughtworks.springbootemployee.service.CompanyService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,18 +17,21 @@ public class CompanyServiceImpl implements CompanyService {
 
     List<Company> companyList = new ArrayList<>();
 
+    private final CompanyRepository companyRepository;
+
     @Autowired
-    private CompanyRepository companyRepository;
+    public CompanyServiceImpl(CompanyRepository companyRepository) {
+        this.companyRepository = companyRepository;
+    }
 
     @Override
     public List<Company> getAllCompanies() {
-        return companyRepository.getAllCompanies();
+        return companyRepository.findAll();
     }
 
     @Override
     public Company getCompany(int id) {
-       // return companyList.stream().filter(company -> company.getId() == id).findFirst().orElse(null);
-        return companyRepository.getCompany(id);
+        return companyRepository.findById(id).orElseThrow(CompanyNotFoundException::new);
     }
 
     @Override
@@ -43,17 +47,18 @@ public class CompanyServiceImpl implements CompanyService {
 
     @Override
     public boolean addCompany(Company company) {
-        return companyRepository.addCompany(company);
+        Company res = companyRepository.save(company);
+        return res !=null;
     }
 
     @Override
     public void deleteAllEmployeesOfCompany(int id) {
-        companyList.stream().filter(e -> e.getId() == id).findFirst().ifPresent(company -> company.getEmployeeList().clear());
+        companyList.stream().filter(e -> e.getCompanyID() == id).findFirst().ifPresent(company -> company.getEmployeeList().clear());
     }
 
     @Override
     public void updateCompany(int id, Company company) {
-        Company originCompany = companyList.stream().filter(dataBaseCompany -> company.getId() == dataBaseCompany.getId()).findFirst().orElse(null);
+        Company originCompany = companyList.stream().filter(dataBaseCompany -> company.getCompanyID() == dataBaseCompany.getCompanyID()).findFirst().orElse(null);
         if (originCompany != null) {
             companyList.remove(originCompany);
             companyList.add(company);

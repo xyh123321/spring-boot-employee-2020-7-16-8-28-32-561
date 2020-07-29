@@ -2,19 +2,27 @@ package com.thoughtworks.springbootemployee.service.impl;
 
 import com.thoughtworks.springbootemployee.entity.Company;
 import com.thoughtworks.springbootemployee.entity.Employee;
+import com.thoughtworks.springbootemployee.repository.EmployeeRepository;
 import com.thoughtworks.springbootemployee.service.EmployeeService;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
 
 @Service
 public class EmployeeServiceImpl implements EmployeeService {
+    private final EmployeeRepository employeeRepository;
+    public EmployeeServiceImpl(EmployeeRepository employeeRepository) {
+        this.employeeRepository = employeeRepository;
+    }
     private List<Employee> employees = new ArrayList<>();
     private Map<Company, List<Employee>> relationship = new HashMap<>();
+
+
 
     public List<Employee> getEmployees() {
         return employees;
@@ -55,7 +63,8 @@ public class EmployeeServiceImpl implements EmployeeService {
         addEmployees(employee);
     }
 
-    public List<Employee> pagingQueryEmployees(int page, int pageSize) {
-        return employees.stream().skip((page - 1) * pageSize).limit(pageSize).collect(Collectors.toList());
+
+    public Page<Employee> pagingQueryEmployees(Pageable pageable) {
+        return employeeRepository.findAll(pageable);
     }
 }
