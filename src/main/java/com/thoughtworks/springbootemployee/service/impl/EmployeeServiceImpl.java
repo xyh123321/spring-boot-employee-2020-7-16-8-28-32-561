@@ -27,7 +27,7 @@ public class EmployeeServiceImpl implements EmployeeService {
     private List<Employee> employees = new ArrayList<>();
 
     public List<Employee> getEmployees() {
-        return employees;
+        return employeeRepository.findAll();
     }
 
     public Employee getSpecificEmployee(int id) {
@@ -53,8 +53,6 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
 
     public void updateEmployees(int id, Employee employee) {
-//        deleteEmployees(id);
-//        addEmployees(employee);
         employeeRepository.save(employee);
     }
 

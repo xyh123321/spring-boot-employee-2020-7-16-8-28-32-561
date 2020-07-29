@@ -8,6 +8,8 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 public class EmployeeController {
     @Autowired
@@ -34,8 +36,11 @@ public class EmployeeController {
     }
 
     @GetMapping("/employees")
-    public Page<Employee> pagingQueryEmployees(@PageableDefault(size = 2) Pageable pageable) {
-        return employeeServiceImpl.pagingQueryEmployees(pageable);
+    public List<Employee> pagingQueryEmployees(@PageableDefault(size = 2) Pageable pageable, @RequestParam(defaultValue = "false", required = false) boolean unpaged) {
+        if(unpaged){
+            return employeeServiceImpl.getEmployees();
+        }
+        return employeeServiceImpl.pagingQueryEmployees(pageable).getContent();
     }
 }
 
