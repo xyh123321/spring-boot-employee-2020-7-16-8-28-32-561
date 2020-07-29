@@ -39,10 +39,7 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
 
     public void deleteEmployees(int id) {
-        employees.remove(employees.stream()
-                .filter(employee -> id == employee.getId())
-                .findFirst()
-                .orElse(null));
+        employeeRepository.deleteById(id);
     }
 
     public List<Employee> getMaleEmployees(String gender) {
