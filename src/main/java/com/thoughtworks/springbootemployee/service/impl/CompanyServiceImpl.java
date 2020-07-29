@@ -10,14 +10,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
 public class CompanyServiceImpl implements CompanyService {
-
-    List<Company> companyList = new ArrayList<>();
 
     private final CompanyRepository companyRepository;
 
@@ -52,14 +49,17 @@ public class CompanyServiceImpl implements CompanyService {
 
     @Override
     public boolean addCompany(Company company) {
-        Company res = companyRepository.save(company);
+        companyRepository.save(company);
         return true;
     }
 
     @Override
     public void deleteTheCompanyAllInfo(int id) {
         Company company = getCompany(id);
-        employeeRepository.findAll().stream().filter(employee -> employee.getCompany().getCompanyID()==company.getCompanyID()).peek(employee -> employee.setCompany(null)).collect(Collectors.toList());
+        employeeRepository.findAll().stream()
+                .filter(employee -> employee.getCompany().getCompanyID()==company.getCompanyID())
+                .peek(employee -> employee.setCompany(null))
+                .collect(Collectors.toList());
         companyRepository.deleteById(id);
     }
 
