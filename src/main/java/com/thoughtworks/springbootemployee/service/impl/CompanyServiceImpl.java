@@ -43,8 +43,7 @@ public class CompanyServiceImpl implements CompanyService {
 
     @Override
     public boolean addCompany(Company company) {
-
-        return false;
+        return companyRepository.addCompany(company);
     }
 
     @Override
