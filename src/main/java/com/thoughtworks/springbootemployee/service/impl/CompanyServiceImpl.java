@@ -4,25 +4,26 @@ import com.thoughtworks.springbootemployee.entity.Company;
 import com.thoughtworks.springbootemployee.entity.Employee;
 import com.thoughtworks.springbootemployee.exception.CompanyNotFoundException;
 import com.thoughtworks.springbootemployee.repository.CompanyRepository;
+import com.thoughtworks.springbootemployee.repository.EmployeeRepository;
 import com.thoughtworks.springbootemployee.service.CompanyService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class CompanyServiceImpl implements CompanyService {
 
-    List<Company> companyList = new ArrayList<>();
-
     private final CompanyRepository companyRepository;
 
+    private final EmployeeRepository employeeRepository;
+
     @Autowired
-    public CompanyServiceImpl(CompanyRepository companyRepository) {
+    public CompanyServiceImpl(CompanyRepository companyRepository, EmployeeRepository employeeRepository) {
         this.companyRepository = companyRepository;
+        this.employeeRepository = employeeRepository;
     }
 
     @Override
@@ -48,23 +49,23 @@ public class CompanyServiceImpl implements CompanyService {
 
     @Override
     public boolean addCompany(Company company) {
-        Company res = companyRepository.save(company);
-        return res != null;
+        companyRepository.save(company);
+        return true;
     }
 
     @Override
-    public void deleteAllEmployeesOfCompany(int id) {
-        companyList.stream().filter(e -> e.getCompanyID() == id).findFirst().ifPresent(company -> company.getEmployeeList().clear());
+    public void deleteTheCompanyAllInfo(int id) {
+        Company company = getCompany(id);
+        employeeRepository.findAll().stream()
+                .filter(employee -> employee.getCompany().getCompanyID()==company.getCompanyID())
+                .peek(employee -> employee.setCompany(null))
+                .collect(Collectors.toList());
+        companyRepository.deleteById(id);
     }
 
     @Override
-    public void updateCompany(int id, Company company) {
-        Company originCompany = companyList.stream().filter(dataBaseCompany -> company.getCompanyID() == dataBaseCompany.getCompanyID()).findFirst().orElse(null);
-        if (originCompany != null) {
-            companyList.remove(originCompany);
-            companyList.add(company);
-        }
-
+    public void updateCompany(Company company) {
+        companyRepository.save(company);
     }
 
 

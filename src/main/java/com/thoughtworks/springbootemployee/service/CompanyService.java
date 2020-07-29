@@ -19,7 +19,7 @@ public interface CompanyService {
 
     boolean addCompany(Company company);
 
-    void deleteAllEmployeesOfCompany(int id);
+    void deleteTheCompanyAllInfo(int id);
 
-    void updateCompany(int id, Company company);
+    void updateCompany(Company company);
 }

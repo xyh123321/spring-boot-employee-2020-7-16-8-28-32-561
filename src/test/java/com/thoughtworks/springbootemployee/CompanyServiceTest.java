@@ -55,12 +55,6 @@ public class CompanyServiceTest {
         assertEquals(true, result);
     }
 
-
-
-
-
-
-
     @Test
     void should_return_companies_when_get_all_companies_given_a_company_repository() {
         //given
