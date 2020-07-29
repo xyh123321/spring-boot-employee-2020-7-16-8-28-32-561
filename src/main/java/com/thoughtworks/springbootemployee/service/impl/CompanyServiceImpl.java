@@ -21,7 +21,7 @@ public class CompanyServiceImpl implements CompanyService {
 
     @Override
     public List<Company> getAllCompanies() {
-        return companyList;
+        return companyRepository.getAllCompanies();
     }
 
     @Override
