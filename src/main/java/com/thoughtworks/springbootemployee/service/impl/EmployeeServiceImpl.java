@@ -35,12 +35,7 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
 
     public void addEmployees(Employee employee) {
-        if (employees.stream()
-                .filter(newEmployee -> employee.getId() == newEmployee.getId())
-                .findFirst()
-                .orElse(null) == null) {
-            employees.add(employee);
-        }
+        employeeRepository.save(employee);
     }
 
     public void deleteEmployees(int id) {
