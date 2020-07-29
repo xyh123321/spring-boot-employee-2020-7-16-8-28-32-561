@@ -48,7 +48,7 @@ public class CompanyServiceImpl implements CompanyService {
     @Override
     public boolean addCompany(Company company) {
         Company res = companyRepository.save(company);
-        return res !=null;
+        return res != null;
     }
 
     @Override

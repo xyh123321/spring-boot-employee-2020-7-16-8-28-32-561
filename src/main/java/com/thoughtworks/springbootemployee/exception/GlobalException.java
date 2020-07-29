@@ -10,7 +10,7 @@ public class GlobalException {
 
     @ResponseStatus(HttpStatus.NOT_FOUND)
     @ExceptionHandler(CompanyNotFoundException.class)
-    void CompanyNotFoundException(){
+    void CompanyNotFoundException() {
 
     }
 }

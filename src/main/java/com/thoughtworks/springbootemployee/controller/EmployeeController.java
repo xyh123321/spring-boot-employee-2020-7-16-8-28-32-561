@@ -35,7 +35,7 @@ public class EmployeeController {
 
     @GetMapping("/employees")
     public Page<Employee> pagingQueryEmployees(@PageableDefault(size = 2) Pageable pageable) {
-          return  employeeServiceImpl.pagingQueryEmployees(pageable);
-        }
+        return employeeServiceImpl.pagingQueryEmployees(pageable);
     }
+}
 
