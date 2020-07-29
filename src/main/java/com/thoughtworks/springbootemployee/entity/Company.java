@@ -1,31 +1,41 @@
 package com.thoughtworks.springbootemployee.entity;
 
+import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
+
+@Entity
+@Table(name = "company")
 public class Company {
-    private String companyName;
-    private int id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "company_id")
+    private int companyID;
+
+    private String name;
+
+    @OneToMany(mappedBy = "company")
     private List<Employee> employeeList;
 
     public Company() {
         this.employeeList = new ArrayList<>();
     }
 
-    public String getCompanyName() {
-        return companyName;
+    public String getName() {
+        return name;
     }
 
-    public void setCompanyName(String companyName) {
-        this.companyName = companyName;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public int getId() {
-        return id;
+    public int getCompanyID() {
+        return companyID;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setCompanyID(int companyID) {
+        this.companyID = companyID;
     }
 
     public List<Employee> getEmployeeList() {

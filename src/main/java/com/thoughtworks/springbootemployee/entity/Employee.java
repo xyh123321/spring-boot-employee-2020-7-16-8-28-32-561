@@ -1,11 +1,24 @@
 package com.thoughtworks.springbootemployee.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+import javax.persistence.*;
+
+@Entity
+@Table(name = "employee")
 public class Employee {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private String name;
     private String gender;
     private int age;
-    private int companyID;
+
+    @JsonIgnore
+    @ManyToOne
+    @JoinColumn(name = "company_id")
+    private Company company;
 
     public int getId() {
         return id;
@@ -39,11 +52,12 @@ public class Employee {
         this.age = age;
     }
 
-    public int getCompanyID() {
-        return companyID;
+
+    public Company getCompany() {
+        return company;
     }
 
-    public void setCompanyID(int companyID) {
-        this.companyID = companyID;
+    public void setCompany(Company company) {
+        this.company = company;
     }
 }
