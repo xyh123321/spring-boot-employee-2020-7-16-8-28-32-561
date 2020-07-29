@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class CompanyServiceImpl implements CompanyService {
@@ -53,11 +54,13 @@ public class CompanyServiceImpl implements CompanyService {
     public boolean addCompany(Company company) {
         Company res = companyRepository.save(company);
         employeeRepository.saveAll(company.getEmployeeList());
-        return res != null;
+        return true;
     }
 
     @Override
     public void deleteTheCompanyAllInfo(int id) {
+        Company company = getCompany(id);
+        employeeRepository.findAll().stream().filter(employee -> employee.getCompany().getCompanyID()==company.getCompanyID()).peek(employee -> employee.setCompany(null)).collect(Collectors.toList());
         companyRepository.deleteById(id);
     }
 
