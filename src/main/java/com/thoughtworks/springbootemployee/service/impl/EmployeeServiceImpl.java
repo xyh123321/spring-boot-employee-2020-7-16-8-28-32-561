@@ -2,6 +2,8 @@ package com.thoughtworks.springbootemployee.service.impl;
 
 import com.thoughtworks.springbootemployee.entity.Company;
 import com.thoughtworks.springbootemployee.entity.Employee;
+import com.thoughtworks.springbootemployee.exception.CompanyNotFoundException;
+import com.thoughtworks.springbootemployee.exception.EmployeeNotFoundException;
 import com.thoughtworks.springbootemployee.repository.EmployeeRepository;
 import com.thoughtworks.springbootemployee.service.EmployeeService;
 import org.springframework.data.domain.Page;
@@ -29,7 +31,7 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
 
     public Employee getSpecificEmployee(int id) {
-        return employees.get(id);
+        return employeeRepository.findById(id).orElseThrow(EmployeeNotFoundException::new);
     }
 
     public void addEmployees(Employee employee) {

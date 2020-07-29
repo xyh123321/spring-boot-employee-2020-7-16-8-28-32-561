@@ -14,7 +14,7 @@ public class EmployeeController {
     private EmployeeServiceImpl employeeServiceImpl;
 
     @GetMapping("/employees/{id}")
-    public Employee getSpecificEmployee(@RequestParam("id") int id) {
+    public Employee getSpecificEmployee(@PathVariable("id") int id) {
         return employeeServiceImpl.getSpecificEmployee(id);
     }
 
