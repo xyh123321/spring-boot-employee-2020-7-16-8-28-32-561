@@ -1,4 +1,4 @@
-package com.thoughtworks.springbootemployee.repository;
+package com.thoughtworks.springbootemployee.service.impl;
 
 import com.thoughtworks.springbootemployee.entity.Company;
 import com.thoughtworks.springbootemployee.entity.Employee;
@@ -15,7 +15,6 @@ import java.util.stream.Collectors;
 public class EmployeeServiceImpl implements EmployeeService {
     private List<Employee> employees = new ArrayList<>();
     private Map<Company, List<Employee>> relationship = new HashMap<>();
-    private Company company;
 
     public List<Employee> getEmployees() {
         return employees;
@@ -32,9 +31,6 @@ public class EmployeeServiceImpl implements EmployeeService {
                 .orElse(null) == null) {
             employees.add(employee);
         }
-//        if(!(relationship.containsValue(employees))){
-//            relationship.get(company).add(employee);
-//        }
     }
 
     public void deleteEmployees(int id) {
