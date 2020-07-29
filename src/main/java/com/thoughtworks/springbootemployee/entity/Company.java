@@ -1,5 +1,7 @@
 package com.thoughtworks.springbootemployee.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -17,10 +19,6 @@ public class Company {
 
     @OneToMany(mappedBy = "company")
     private List<Employee> employeeList;
-
-    public Company() {
-        this.employeeList = new ArrayList<>();
-    }
 
     public String getName() {
         return name;
