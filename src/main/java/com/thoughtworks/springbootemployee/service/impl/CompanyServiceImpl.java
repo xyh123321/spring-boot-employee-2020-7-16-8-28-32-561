@@ -58,9 +58,7 @@ public class CompanyServiceImpl implements CompanyService {
 
     @Override
     public void deleteAllEmployeesOfCompany(int id) {
-        Company company = getCompany(id);
-        company.getEmployeeList().clear();
-        companyRepository.save(company);
+        companyRepository.deleteById(id);
     }
 
     @Override
