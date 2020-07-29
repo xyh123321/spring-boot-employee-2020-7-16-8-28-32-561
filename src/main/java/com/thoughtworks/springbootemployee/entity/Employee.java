@@ -5,6 +5,7 @@ public class Employee {
     private String name;
     private String gender;
     private int age;
+    private int companyID;
 
     public int getId() {
         return id;
@@ -36,5 +37,13 @@ public class Employee {
 
     public void setAge(int age) {
         this.age = age;
+    }
+
+    public int getCompanyID() {
+        return companyID;
+    }
+
+    public void setCompanyID(int companyID) {
+        this.companyID = companyID;
     }
 }

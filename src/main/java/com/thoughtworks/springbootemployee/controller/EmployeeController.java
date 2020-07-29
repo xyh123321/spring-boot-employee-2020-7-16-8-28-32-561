@@ -10,7 +10,7 @@ import java.util.List;
 @RestController
 public class EmployeeController {
     @Autowired
-    EmployeeServiceImpl employeeServiceImpl;
+    private EmployeeServiceImpl employeeServiceImpl;
 
     @GetMapping("/employees/{id}")
     public Employee getSpecificEmployee(@RequestParam("id") int id) {

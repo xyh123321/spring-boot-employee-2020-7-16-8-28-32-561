@@ -12,7 +12,7 @@ import java.util.List;
 public class CompanyController {
 
     @Autowired
-    CompanyServiceImpl companyService;
+    private CompanyServiceImpl companyService;
 
     @GetMapping("/companies/{id}")
     private Company getCompany(@PathVariable("id") int id) {

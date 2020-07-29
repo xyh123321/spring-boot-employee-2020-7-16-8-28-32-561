@@ -2,7 +2,9 @@ package com.thoughtworks.springbootemployee.service.impl;
 
 import com.thoughtworks.springbootemployee.entity.Company;
 import com.thoughtworks.springbootemployee.entity.Employee;
+import com.thoughtworks.springbootemployee.repository.CompanyRepository;
 import com.thoughtworks.springbootemployee.service.CompanyService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -14,6 +16,9 @@ public class CompanyServiceImpl implements CompanyService {
 
     List<Company> companyList = new ArrayList<>();
 
+    @Autowired
+    private CompanyRepository companyRepository;
+
     @Override
     public List<Company> getAllCompanies() {
         return companyList;
@@ -21,7 +26,8 @@ public class CompanyServiceImpl implements CompanyService {
 
     @Override
     public Company getCompany(int id) {
-        return companyList.stream().filter(company -> company.getId() == id).findFirst().orElse(null);
+       // return companyList.stream().filter(company -> company.getId() == id).findFirst().orElse(null);
+        return companyRepository.getCompany(id);
     }
 
     @Override
