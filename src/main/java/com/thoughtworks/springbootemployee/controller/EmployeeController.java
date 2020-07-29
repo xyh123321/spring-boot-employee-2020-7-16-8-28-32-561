@@ -42,5 +42,10 @@ public class EmployeeController {
         }
         return employeeServiceImpl.pagingQueryEmployees(pageable).getContent();
     }
+
+    @GetMapping(value = "/employees", params = "gender")
+    public List<Employee> getMaleEmployees(@RequestParam("gender") String gender){
+        return employeeServiceImpl.getMaleEmployees(gender);
+    }
 }
 
