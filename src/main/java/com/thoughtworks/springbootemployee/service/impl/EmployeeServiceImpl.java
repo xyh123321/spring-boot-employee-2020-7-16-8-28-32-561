@@ -52,7 +52,7 @@ public class EmployeeServiceImpl implements EmployeeService {
         return maleEmployees;
     }
 
-    public void updateEmployees(int id, Employee employee) {
+    public void updateEmployees(Employee employee) {
         employeeRepository.save(employee);
     }
 

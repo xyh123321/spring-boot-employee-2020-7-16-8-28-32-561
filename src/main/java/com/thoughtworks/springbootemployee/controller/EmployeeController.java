@@ -30,9 +30,9 @@ public class EmployeeController {
         employeeServiceImpl.deleteEmployees(id);
     }
 
-    @PutMapping("/employees/{id}")
-    public void updateEmployees(@PathVariable("id") int id, @RequestBody Employee employee) {
-        employeeServiceImpl.updateEmployees(id, employee);
+    @PutMapping("/employees")
+    public void updateEmployees(@RequestBody Employee employee) {
+        employeeServiceImpl.updateEmployees(employee);
     }
 
     @GetMapping("/employees")

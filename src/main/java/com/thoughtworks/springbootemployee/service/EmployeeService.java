@@ -17,7 +17,7 @@ public interface EmployeeService {
 
     List<Employee> getMaleEmployees(String gender);
 
-    void updateEmployees(int id, Employee employee);
+    void updateEmployees(Employee employee);
 
     Page<Employee> pagingQueryEmployees(Pageable pageable);
 }
