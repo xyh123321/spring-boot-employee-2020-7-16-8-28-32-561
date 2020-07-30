@@ -65,4 +65,19 @@ public class EmployeeIntegrationTest {
         List<Employee> employees = employeeRepository.findAll();
         assertEquals(1,employees.size());
     }
+
+    @Test
+    void should_return_404_when_add_employee() throws Exception {
+        String body = " {\n" +
+                "                \"name\": \"chengcheng2222\",\n" +
+                "                \"gender\": \"male\",\n" +
+                "                \"age\": 54,\n" +
+                "                \"companyId\":1\n" +
+                "            }";
+        mockMvc.perform(MockMvcRequestBuilders
+                .post("/employees")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(body))
+                .andExpect(status().isNotFound());
+    }
 }
