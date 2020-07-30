@@ -25,6 +25,14 @@ public class Company {
         return name;
     }
 
+    public Company() {
+    }
+
+    public Company(int companyID, String name) {
+        this.companyID = companyID;
+        this.name = name;
+    }
+
     public void setName(String name) {
         this.name = name;
     }

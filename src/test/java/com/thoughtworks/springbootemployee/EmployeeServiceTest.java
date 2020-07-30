@@ -1,6 +1,7 @@
 package com.thoughtworks.springbootemployee;
 
 import com.thoughtworks.springbootemployee.Dto.EmployeeResponse;
+import com.thoughtworks.springbootemployee.entity.Company;
 import com.thoughtworks.springbootemployee.entity.Employee;
 import com.thoughtworks.springbootemployee.repository.CompanyRepository;
 import com.thoughtworks.springbootemployee.repository.EmployeeRepository;
@@ -41,4 +42,18 @@ public class EmployeeServiceTest {
         //then
         assertEquals(1, employeeResponses.size());
     }
+//
+//    @Test
+//    void should_return_new_employee_when_add_employee_given_new_employee() {
+//        //given
+//        Company company = new Company(1,"oocl");
+//
+//
+//        //when
+//
+//
+//        //then
+//
+//
+//    }
 }
