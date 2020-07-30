@@ -1,8 +1,12 @@
 package com.thoughtworks.springbootemployee.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.thoughtworks.springbootemployee.validator.GenderValidation;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
 
 @Entity
 @Table(name = "employee")
@@ -11,7 +15,9 @@ public class Employee {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+    @NotBlank
     private String name;
+    @GenderValidation(validValues = {"male","female"})
     private String gender;
     private int age;
 
