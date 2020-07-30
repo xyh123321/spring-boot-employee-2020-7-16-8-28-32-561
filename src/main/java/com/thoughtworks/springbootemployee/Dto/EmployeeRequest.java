@@ -1,8 +1,17 @@
 package com.thoughtworks.springbootemployee.Dto;
 
+
+import org.springframework.validation.annotation.Validated;
+
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
+
+@Validated
 public class EmployeeRequest {
     private int id;
+    @NotBlank
     private String name;
+    @Size(min = 1, max = 10)
     private String gender;
     private int age;
     private int companyId;

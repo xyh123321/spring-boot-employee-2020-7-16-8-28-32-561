@@ -57,4 +57,16 @@ public class CompanyIntegrationTest {
 
         assertEquals("tw", companies.get(0).getName());
     }
+
+    @Test
+    void should_return_a_specific_company_when_get_specific_company_given_() {
+        //given
+
+        //when
+
+
+        //then
+
+
+    }
 }

@@ -4,6 +4,7 @@ import com.thoughtworks.springbootemployee.Dto.EmployeeRequest;
 import com.thoughtworks.springbootemployee.Dto.EmployeeResponse;
 import com.thoughtworks.springbootemployee.entity.Company;
 import com.thoughtworks.springbootemployee.entity.Employee;
+import com.thoughtworks.springbootemployee.exception.CompanyNotFoundException;
 import com.thoughtworks.springbootemployee.exception.EmployeeNotFoundException;
 import com.thoughtworks.springbootemployee.repository.CompanyRepository;
 import com.thoughtworks.springbootemployee.repository.EmployeeRepository;
@@ -46,7 +47,6 @@ public class EmployeeServiceImpl implements EmployeeService {
         employeeRepository.save(employee);
     }
 
-
     public Page<Employee> pagingQueryEmployees(Pageable pageable) {
         return employeeRepository.findAll(pageable);
     }
@@ -75,7 +75,8 @@ public class EmployeeServiceImpl implements EmployeeService {
             employeeResponse.setGender(employeeResult.getGender());
             employeeResponse.setCompanyName(employeeResult.getCompany().getName());
             return employeeResponse;
+        } else {
+            return null;
         }
-        return null;
     }
 }
