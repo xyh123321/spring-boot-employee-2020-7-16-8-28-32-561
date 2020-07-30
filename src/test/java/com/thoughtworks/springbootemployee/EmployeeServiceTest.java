@@ -71,7 +71,6 @@ public class EmployeeServiceTest {
         Employee employee = new Employee("Eric", "male", 20, null);
         EmployeeRequest employeeRequest = new EmployeeRequest("Eric", "male", 20, 1);
         Mockito.when(companyRepository.findById(1)).thenReturn(Optional.empty());
-        Mockito.when(employeeRepository.save(any())).thenReturn(employee);
 
         //when
         EmployeeResponse employeeResponse = employeeService.addEmployees(employeeRequest);

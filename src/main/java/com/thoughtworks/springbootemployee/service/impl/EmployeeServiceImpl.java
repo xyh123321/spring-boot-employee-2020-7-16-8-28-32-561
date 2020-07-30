@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -61,13 +62,13 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
 
     public EmployeeResponse addEmployees(EmployeeRequest employeeRequest) {
-        Company company = companyRepository.findById(employeeRequest.getCompanyId()).get();
-        if (company != null) {
+        Optional<Company> company = companyRepository.findById(employeeRequest.getCompanyId());
+        if (company.isPresent()) {
             Employee employee = new Employee();
             employee.setName(employeeRequest.getName());
             employee.setGender(employeeRequest.getGender());
             employee.setAge(employeeRequest.getAge());
-            employee.setCompany(company);
+            employee.setCompany(company.get());
             Employee employeeResult = employeeRepository.save(employee);
             EmployeeResponse employeeResponse = new EmployeeResponse();
             employeeResponse.setName(employeeResult.getName());
