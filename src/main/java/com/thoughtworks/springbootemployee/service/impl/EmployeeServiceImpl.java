@@ -16,6 +16,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 @Service
 public class EmployeeServiceImpl implements EmployeeService {
@@ -57,6 +58,12 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
 
     public List<EmployeeResponse> getEmployees2() {
-        return null;
+        return employeeRepository.findAll().stream().map(employee -> {
+            EmployeeResponse employeeResponse = new EmployeeResponse();
+            employeeResponse.setId(employee.getId());
+            employeeResponse.setName(employee.getName());
+            employeeResponse.setGender(employee.getGender());
+            return employeeResponse;
+        }).collect(Collectors.toList());
     }
 }
