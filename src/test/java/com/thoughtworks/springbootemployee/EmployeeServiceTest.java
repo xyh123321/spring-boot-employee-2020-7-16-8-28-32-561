@@ -38,7 +38,7 @@ public class EmployeeServiceTest {
     @Test
     void should_return_employee_responses_when_get_employees_given_employees() {
         //given
-        Employee employee = new Employee(1, "Eric", "male", 18, null);
+        Employee employee = new Employee("Eric", "male", 18, null);
         List<Employee> employees = new ArrayList<>();
         employees.add(employee);
         Mockito.when(employeeRepository.findAll()).thenReturn(employees);
@@ -53,8 +53,8 @@ public class EmployeeServiceTest {
     @Test
     void should_return_new_employee_when_add_employee_given_new_employee() {
         //given
-        Company company = new Company(1,"oocl");
-        Employee employee = new Employee(1, "Eric", "male", 20, company);
+        Company company = new Company("oocl");
+        Employee employee = new Employee("Eric", "male", 20, company);
         EmployeeRequest employeeRequest = new EmployeeRequest(1, "Eric", "male", 20, 1);
         Mockito.when(companyRepository.findById(1)).thenReturn(Optional.of(company));
         Mockito.when(employeeRepository.save(any())).thenReturn(employee);

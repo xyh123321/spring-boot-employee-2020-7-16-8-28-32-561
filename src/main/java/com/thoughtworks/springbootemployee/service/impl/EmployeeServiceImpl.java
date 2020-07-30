@@ -68,14 +68,12 @@ public class EmployeeServiceImpl implements EmployeeService {
         Company company = companyRepository.findById(employeeRequest.getCompanyId()).get();
         if (company != null) {
             Employee employee = new Employee();
-            employee.setId(employeeRequest.getId());
             employee.setName(employeeRequest.getName());
             employee.setGender(employeeRequest.getGender());
             employee.setAge(employeeRequest.getAge());
             employee.setCompany(company);
             Employee employeeResult = employeeRepository.save(employee);
             EmployeeResponse employeeResponse = new EmployeeResponse();
-            employeeResponse.setId(employeeResult.getId());
             employeeResponse.setName(employeeResult.getName());
             employeeResponse.setGender(employeeResult.getGender());
             employeeResponse.setCompanyName(employeeResult.getCompany().getName());

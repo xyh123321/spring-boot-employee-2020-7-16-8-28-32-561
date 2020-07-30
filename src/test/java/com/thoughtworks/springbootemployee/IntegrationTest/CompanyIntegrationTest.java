@@ -15,6 +15,7 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @SpringBootTest
@@ -29,7 +30,12 @@ public class CompanyIntegrationTest {
 
     @Test
     void should_return_company_responses_when_get_companies_given_companies() throws Exception {
-        mockMvc.perform(get("/companies")).andExpect(status().isOk());
+        Company company = new Company("tw");
+        companyRepository.save(company);
+        mockMvc.perform(get("/companies")
+                .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("[0].name").value("tw"));
     }
 
     @Test

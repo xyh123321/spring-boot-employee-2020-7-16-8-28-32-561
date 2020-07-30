@@ -28,8 +28,7 @@ public class Company {
     public Company() {
     }
 
-    public Company(int companyID, String name) {
-        this.companyID = companyID;
+    public Company(String name) {
         this.name = name;
     }
 
