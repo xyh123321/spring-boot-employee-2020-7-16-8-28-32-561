@@ -20,6 +20,16 @@ public class Employee {
     @JoinColumn(name = "company_id")
     private Company company;
 
+    public Employee() {
+    }
+
+    public Employee(String name, String gender, int age, Company company) {
+        this.name = name;
+        this.gender = gender;
+        this.age = age;
+        this.company = company;
+    }
+
     public int getId() {
         return id;
     }
