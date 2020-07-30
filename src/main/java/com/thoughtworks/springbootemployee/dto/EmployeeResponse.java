@@ -8,6 +8,15 @@ public class EmployeeResponse {
     public EmployeeResponse() {
     }
 
+    @Override
+    public String toString() {
+        return "EmployeeResponse{" +
+                "name='" + name + '\'' +
+                ", gender='" + gender + '\'' +
+                ", companyName='" + companyName + '\'' +
+                '}';
+    }
+
     public EmployeeResponse(String name, String gender, String companyName) {
         this.name = name;
         this.gender = gender;
