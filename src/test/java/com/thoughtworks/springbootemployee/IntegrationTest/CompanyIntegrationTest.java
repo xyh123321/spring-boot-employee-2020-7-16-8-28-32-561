@@ -48,5 +48,7 @@ public class CompanyIntegrationTest {
 
         //then
         assertEquals(1, companies.size());
+
+        assertEquals("tw", companies.get(0).getName());
     }
 }

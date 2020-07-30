@@ -1,5 +1,6 @@
 package com.thoughtworks.springbootemployee.service.impl;
 
+import com.thoughtworks.springbootemployee.Dto.EmployeeRequest;
 import com.thoughtworks.springbootemployee.Dto.EmployeeResponse;
 import com.thoughtworks.springbootemployee.entity.Company;
 import com.thoughtworks.springbootemployee.entity.Employee;
@@ -61,5 +62,9 @@ public class EmployeeServiceImpl implements EmployeeService {
             employeeResponse.setGender(employee.getGender());
             return employeeResponse;
         }).collect(Collectors.toList());
+    }
+
+    public EmployeeResponse addEmployees2(EmployeeRequest employeeRequest) {
+        return null;
     }
 }
