@@ -14,8 +14,13 @@ import java.util.List;
 @RestController
 public class CompanyController {
 
-    @Autowired
-    private CompanyServiceImpl companyService;
+//    @Autowired
+//    private CompanyServiceImpl companyService;
+    private final CompanyServiceImpl companyService;
+
+    public CompanyController(CompanyServiceImpl companyService) {
+        this.companyService = companyService;
+    }
 
     @GetMapping("/companies/{id}")
     private Company getCompany(@PathVariable("id") int id) {
@@ -27,7 +32,7 @@ public class CompanyController {
         return companyService.getAllEmployeesOfCompany(id);
     }
 
-    @GetMapping(value = "/companies")
+    @GetMapping("/companies")
     private List<Company> queryCompanies(@PageableDefault(size = 2) Pageable pageable,@RequestParam(defaultValue = "false",required = false) boolean unpaged) {
         if(unpaged){
             return companyService.getAllCompanies();

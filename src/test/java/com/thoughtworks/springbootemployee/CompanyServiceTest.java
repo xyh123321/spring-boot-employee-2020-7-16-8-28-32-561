@@ -1,6 +1,8 @@
 package com.thoughtworks.springbootemployee;
 
+import com.thoughtworks.springbootemployee.Dto.EmployeeResponse;
 import com.thoughtworks.springbootemployee.entity.Company;
+import com.thoughtworks.springbootemployee.entity.Employee;
 import com.thoughtworks.springbootemployee.repository.CompanyRepository;
 import com.thoughtworks.springbootemployee.service.impl.CompanyServiceImpl;
 import org.junit.jupiter.api.Test;
@@ -71,5 +73,4 @@ public class CompanyServiceTest {
         assertEquals(companies, companiesReslut);
 
     }
-
 }

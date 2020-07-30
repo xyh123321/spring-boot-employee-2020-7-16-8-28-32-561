@@ -1,5 +1,6 @@
 package com.thoughtworks.springbootemployee.service.impl;
 
+import com.thoughtworks.springbootemployee.Dto.EmployeeResponse;
 import com.thoughtworks.springbootemployee.entity.Company;
 import com.thoughtworks.springbootemployee.entity.Employee;
 import com.thoughtworks.springbootemployee.exception.CompanyNotFoundException;
@@ -53,5 +54,9 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     public Page<Employee> pagingQueryEmployees(Pageable pageable) {
         return employeeRepository.findAll(pageable);
+    }
+
+    public List<EmployeeResponse> getEmployees2() {
+        return null;
     }
 }

@@ -15,7 +15,7 @@ public class Employee {
     private String gender;
     private int age;
 
-    @JsonIgnore
+//    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "company_id")
     private Company company;
@@ -59,5 +59,15 @@ public class Employee {
 
     public void setCompany(Company company) {
         this.company = company;
+    }
+
+    public Employee() {
+    }
+
+    public Employee(int id, String name, String gender, int age) {
+        this.id = id;
+        this.name = name;
+        this.gender = gender;
+        this.age = age;
     }
 }

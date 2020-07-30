@@ -10,7 +10,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -38,8 +40,14 @@ public class CompanyServiceImpl implements CompanyService {
 
     @Override
     public List<Employee> getAllEmployeesOfCompany(int id) {
-        Company company = getCompany(id);
-        return company.getEmployeeList();
+//        Company company = getCompany(id);
+//        return company.getEmployeeList();
+        Optional<Company> byId = companyRepository.findById(id);
+        if(byId.isPresent()){
+            return byId.get().getEmployeeList();
+        }else {
+            return new ArrayList<>();
+        }
     }
 
     @Override

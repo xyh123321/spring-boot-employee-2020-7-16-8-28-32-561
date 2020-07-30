@@ -18,6 +18,7 @@ public class Company {
     private String name;
 
     @OneToMany(mappedBy = "company")
+    @JsonIgnore
     private List<Employee> employeeList;
 
     public String getName() {
