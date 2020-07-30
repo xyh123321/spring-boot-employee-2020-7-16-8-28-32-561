@@ -58,8 +58,7 @@ public class CompanyServiceImpl implements CompanyService {
         Company company = getCompany(id);
         employeeRepository.findAll().stream()
                 .filter(employee -> employee.getCompany().getCompanyID()==company.getCompanyID())
-                .peek(employee -> employee.setCompany(null))
-                .collect(Collectors.toList());
+                .forEach(employee -> employee.setCompany(null));
         companyRepository.deleteById(id);
     }
 
