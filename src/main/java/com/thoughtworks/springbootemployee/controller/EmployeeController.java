@@ -24,7 +24,7 @@ public class EmployeeController {
 
     @PostMapping("/employees")
     public EmployeeResponse addEmployees(@RequestBody EmployeesRequest employee) {
-        return employeeServiceImpl.addEmployees2(employee);
+        return employeeServiceImpl.addEmployees(employee);
     }
 
     @DeleteMapping("/employees/{id}")
