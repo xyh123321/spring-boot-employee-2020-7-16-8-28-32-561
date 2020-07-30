@@ -4,6 +4,7 @@ import com.thoughtworks.springbootemployee.dto.EmployeeResponse;
 import com.thoughtworks.springbootemployee.dto.EmployeesRequest;
 import com.thoughtworks.springbootemployee.entity.Company;
 import com.thoughtworks.springbootemployee.entity.Employee;
+import com.thoughtworks.springbootemployee.exception.CompanyNotFoundException;
 import com.thoughtworks.springbootemployee.exception.EmployeeNotFoundException;
 import com.thoughtworks.springbootemployee.repository.CompanyRepository;
 import com.thoughtworks.springbootemployee.repository.EmployeeRepository;
@@ -36,23 +37,20 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
 
     public EmployeeResponse addEmployees(EmployeesRequest employeesRequest) {
-       Company company = companyRepository.findById(employeesRequest.getCompanyId()).get();
-       if(company != null) {
-           Employee employee = new Employee();
-           employee.setName(employeesRequest.getName());
-           employee.setAge(employeesRequest.getAge());
-           employee.setGender(employeesRequest.getGender());
-           employee.setCompany(company);
+        Company company = companyRepository.findById(employeesRequest.getCompanyId()).orElseThrow(CompanyNotFoundException::new);
+        Employee employee = new Employee();
+        employee.setName(employeesRequest.getName());
+        employee.setAge(employeesRequest.getAge());
+        employee.setGender(employeesRequest.getGender());
+        employee.setCompany(company);
 
-           Employee employeeSaved  = employeeRepository.save(employee);
+        Employee employeeSaved = employeeRepository.save(employee);
 
-           EmployeeResponse employeeResponse = new EmployeeResponse();
-           employeeResponse.setName(employeeSaved.getName());
-           employeeResponse.setGender(employeeSaved.getGender());
-           employeeResponse.setCompanyName(employeeSaved.getCompany().getName());
-           return employeeResponse;
-       }
-       return  null;
+        EmployeeResponse employeeResponse = new EmployeeResponse();
+        employeeResponse.setName(employeeSaved.getName());
+        employeeResponse.setGender(employeeSaved.getGender());
+        employeeResponse.setCompanyName(employeeSaved.getCompany().getName());
+        return employeeResponse;
     }
 
     public void deleteEmployees(int id) {
