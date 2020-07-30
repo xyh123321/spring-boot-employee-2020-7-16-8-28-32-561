@@ -47,5 +47,22 @@ public class EmployeeIntegrationTest {
                 .andExpect(status().isOk());
     }
 
-
+    @Test
+    void should_return_employee_when_add_employee() throws Exception {
+        Company company = new Company("oocl");
+        companyRepository.save(company);
+        String body = " {\n" +
+                "                \"name\": \"chengcheng2222\",\n" +
+                "                \"gender\": \"male\",\n" +
+                "                \"age\": 54,\n" +
+                "                \"companyId\":1\n" +
+                "            }";
+        mockMvc.perform(MockMvcRequestBuilders
+                .post("/employees")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(body))
+                .andExpect(status().isOk());
+        List<Employee> employees = employeeRepository.findAll();
+        assertEquals(1,employees.size());
+    }
 }
