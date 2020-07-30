@@ -7,9 +7,14 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 
+import java.util.List;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @SpringBootTest
@@ -25,5 +30,23 @@ public class CompanyIntegrationTest {
     @Test
     void should_return_company_responses_when_get_companies_given_companies() throws Exception {
         mockMvc.perform(get("/companies")).andExpect(status().isOk());
+    }
+
+    @Test
+    void should_return_new_company_when_add_company_given_new_company() throws Exception {
+        //given
+        String companyRequestJsonPay = "{\n" +
+                "        \"name\": \"tw\"\n" +
+                "    }";
+        mockMvc.perform(post("/companies")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(companyRequestJsonPay))
+                .andExpect(status().isOk());
+
+        //when
+        List<Company> companies = companyRepository.findAll();
+
+        //then
+        assertEquals(1, companies.size());
     }
 }
