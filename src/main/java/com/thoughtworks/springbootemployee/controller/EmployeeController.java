@@ -1,5 +1,7 @@
 package com.thoughtworks.springbootemployee.controller;
 
+import com.thoughtworks.springbootemployee.dto.EmployeeResponse;
+import com.thoughtworks.springbootemployee.dto.EmployeesRequest;
 import com.thoughtworks.springbootemployee.entity.Employee;
 import com.thoughtworks.springbootemployee.service.impl.EmployeeServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,8 +23,8 @@ public class EmployeeController {
     }
 
     @PostMapping("/employees")
-    public void addEmployees(@RequestBody Employee employee) {
-        employeeServiceImpl.addEmployees(employee);
+    public EmployeeResponse addEmployees(@RequestBody EmployeesRequest employee) {
+        return employeeServiceImpl.addEmployees2(employee);
     }
 
     @DeleteMapping("/employees/{id}")
@@ -37,14 +39,14 @@ public class EmployeeController {
 
     @GetMapping("/employees")
     public List<Employee> pagingQueryEmployees(@PageableDefault(size = 2) Pageable pageable, @RequestParam(defaultValue = "false", required = false) boolean unpaged) {
-        if(unpaged){
+        if (unpaged) {
             return employeeServiceImpl.getEmployees();
         }
         return employeeServiceImpl.pagingQueryEmployees(pageable).getContent();
     }
 
     @GetMapping(value = "/employees", params = "gender")
-    public List<Employee> getMaleEmployees(@RequestParam("gender") String gender){
+    public List<Employee> getMaleEmployees(@RequestParam("gender") String gender) {
         return employeeServiceImpl.getMaleEmployees(gender);
     }
 }
