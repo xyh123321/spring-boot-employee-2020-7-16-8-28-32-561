@@ -35,13 +35,13 @@ public class EmployeeController {
         employeeServiceImpl.updateEmployees(employee);
     }
 
-    @GetMapping("/employees")
-    public List<Employee> pagingQueryEmployees(@PageableDefault(size = 2) Pageable pageable, @RequestParam(defaultValue = "false", required = false) boolean unpaged) {
-        if(unpaged){
-            return employeeServiceImpl.getEmployees();
-        }
-        return employeeServiceImpl.pagingQueryEmployees(pageable).getContent();
-    }
+//    @GetMapping("/employees")
+//    public List<Employee> pagingQueryEmployees(@PageableDefault(size = 2) Pageable pageable, @RequestParam(defaultValue = "false", required = false) boolean unpaged) {
+//        if(unpaged){
+//            return employeeServiceImpl.getEmployees();
+//        }
+//        return employeeServiceImpl.pagingQueryEmployees(pageable).getContent();
+//    }
 
     @GetMapping(value = "/employees", params = "gender")
     public List<Employee> getMaleEmployees(@RequestParam("gender") String gender){

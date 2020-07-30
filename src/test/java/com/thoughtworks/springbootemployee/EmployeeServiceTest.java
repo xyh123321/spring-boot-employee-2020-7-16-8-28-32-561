@@ -36,7 +36,7 @@ public class EmployeeServiceTest {
         Mockito.when(employeeRepository.findAll()).thenReturn(employees);
 
         //when
-        List<EmployeeResponse> employeeResponses = employeeService.getEmployees2();
+        List<EmployeeResponse> employeeResponses = employeeService.getEmployees();
 
         //then
         assertEquals(1, employeeResponses.size());

@@ -28,10 +28,6 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     private List<Employee> employees = new ArrayList<>();
 
-    public List<Employee> getEmployees() {
-        return employeeRepository.findAll();
-    }
-
     public Employee getSpecificEmployee(int id) {
         return employeeRepository.findById(id).orElseThrow(EmployeeNotFoundException::new);
     }
@@ -57,7 +53,7 @@ public class EmployeeServiceImpl implements EmployeeService {
         return employeeRepository.findAll(pageable);
     }
 
-    public List<EmployeeResponse> getEmployees2() {
+    public List<EmployeeResponse> getEmployees() {
         return employeeRepository.findAll().stream().map(employee -> {
             EmployeeResponse employeeResponse = new EmployeeResponse();
             employeeResponse.setId(employee.getId());
