@@ -19,8 +19,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
 
 @ExtendWith(MockitoExtension.class)
@@ -55,14 +54,29 @@ public class EmployeeServiceTest {
         //given
         Company company = new Company("oocl");
         Employee employee = new Employee("Eric", "male", 20, company);
-        EmployeeRequest employeeRequest = new EmployeeRequest(1, "Eric", "male", 20, 1);
+        EmployeeRequest employeeRequest = new EmployeeRequest("Eric", "male", 20, 1);
         Mockito.when(companyRepository.findById(1)).thenReturn(Optional.of(company));
         Mockito.when(employeeRepository.save(any())).thenReturn(employee);
 
         //when
-        EmployeeResponse employeeResponse = employeeService.addEmployees2(employeeRequest);
+        EmployeeResponse employeeResponse = employeeService.addEmployees(employeeRequest);
 
         //then
         assertNotNull(employeeResponse);
+    }
+
+    @Test
+    void should_return_company_not_found_exception_when_add_employee_given_new_employee_with_no_company() {
+        //given
+        Employee employee = new Employee("Eric", "male", 20, null);
+        EmployeeRequest employeeRequest = new EmployeeRequest("Eric", "male", 20, 1);
+        Mockito.when(companyRepository.findById(1)).thenReturn(Optional.empty());
+        Mockito.when(employeeRepository.save(any())).thenReturn(employee);
+
+        //when
+        EmployeeResponse employeeResponse = employeeService.addEmployees(employeeRequest);
+
+        //then
+        assertNull(employeeResponse);
     }
 }

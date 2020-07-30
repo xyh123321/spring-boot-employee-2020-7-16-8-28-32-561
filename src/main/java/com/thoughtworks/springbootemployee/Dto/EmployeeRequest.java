@@ -10,8 +10,7 @@ public class EmployeeRequest {
     public EmployeeRequest() {
     }
 
-    public EmployeeRequest(int id, String name, String gender, int age, int companyId) {
-        this.id = id;
+    public EmployeeRequest(String name, String gender, int age, int companyId) {
         this.name = name;
         this.gender = gender;
         this.age = age;
