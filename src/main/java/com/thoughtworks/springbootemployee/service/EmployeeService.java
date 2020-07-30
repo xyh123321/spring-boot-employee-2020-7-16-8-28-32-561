@@ -1,5 +1,6 @@
 package com.thoughtworks.springbootemployee.service;
 
+import com.thoughtworks.springbootemployee.Dto.EmployeeRequest;
 import com.thoughtworks.springbootemployee.Dto.EmployeeResponse;
 import com.thoughtworks.springbootemployee.entity.Employee;
 import org.springframework.data.domain.Page;
@@ -12,7 +13,7 @@ public interface EmployeeService {
 
     Employee getSpecificEmployee(int id);
 
-    void addEmployees(Employee employee);
+    EmployeeResponse addEmployees(EmployeeRequest employeeRequest);
 
     void deleteEmployees(int id);
 

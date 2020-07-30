@@ -1,5 +1,7 @@
 package com.thoughtworks.springbootemployee.controller;
 
+import com.thoughtworks.springbootemployee.Dto.EmployeeRequest;
+import com.thoughtworks.springbootemployee.Dto.EmployeeResponse;
 import com.thoughtworks.springbootemployee.entity.Employee;
 import com.thoughtworks.springbootemployee.service.impl.EmployeeServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,8 +23,8 @@ public class EmployeeController {
     }
 
     @PostMapping("/employees")
-    public void addEmployees(@RequestBody Employee employee) {
-        employeeServiceImpl.addEmployees(employee);
+    public EmployeeResponse addEmployees(@RequestBody EmployeeRequest employeeRequest) {
+        return employeeServiceImpl.addEmployees(employeeRequest);
     }
 
     @DeleteMapping("/employees/{id}")
@@ -35,13 +37,15 @@ public class EmployeeController {
         employeeServiceImpl.updateEmployees(employee);
     }
 
-//    @GetMapping("/employees")
-//    public List<Employee> pagingQueryEmployees(@PageableDefault(size = 2) Pageable pageable, @RequestParam(defaultValue = "false", required = false) boolean unpaged) {
-//        if(unpaged){
-//            return employeeServiceImpl.getEmployees();
-//        }
-//        return employeeServiceImpl.pagingQueryEmployees(pageable).getContent();
-//    }
+    @GetMapping("/employees")
+    public List<EmployeeResponse> getEmployees() {
+        return employeeServiceImpl.getEmployees();
+    }
+
+    @GetMapping(value = "/employees", params = {"page","size"})
+    public List<Employee> pagingQueryEmployees(@PageableDefault(size = 2) Pageable pageable, @RequestParam(defaultValue = "false", required = false) boolean unpaged) {
+        return employeeServiceImpl.pagingQueryEmployees(pageable).getContent();
+    }
 
     @GetMapping(value = "/employees", params = "gender")
     public List<Employee> getMaleEmployees(@RequestParam("gender") String gender){
