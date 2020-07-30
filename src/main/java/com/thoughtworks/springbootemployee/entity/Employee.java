@@ -64,10 +64,11 @@ public class Employee {
     public Employee() {
     }
 
-    public Employee(int id, String name, String gender, int age) {
+    public Employee(int id, String name, String gender, int age, Company company) {
         this.id = id;
         this.name = name;
         this.gender = gender;
         this.age = age;
+        this.company = company;
     }
 }
