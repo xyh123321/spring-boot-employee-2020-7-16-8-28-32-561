@@ -20,6 +20,13 @@ public class Company {
     @OneToMany(mappedBy = "company")
     private List<Employee> employeeList;
 
+    public Company(String name) {
+        this.name = name;
+    }
+
+    public Company() {
+    }
+
     public String getName() {
         return name;
     }
