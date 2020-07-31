@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.thoughtworks.springbootemployee.validator.GenderValidation;
 
 import javax.persistence.*;
+import javax.validation.Valid;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
@@ -17,7 +18,7 @@ public class Employee {
     private int id;
     @NotBlank
     private String name;
-    @GenderValidation(validValues = {"male","female"})
+    @GenderValidation(genderValues = {"male","female"},message = "gender is male or female")
     private String gender;
     private int age;
 

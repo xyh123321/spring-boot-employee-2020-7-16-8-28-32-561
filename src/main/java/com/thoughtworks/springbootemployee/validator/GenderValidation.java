@@ -13,6 +13,6 @@ import java.lang.annotation.Target;
 public @interface GenderValidation {
     String message() default "";
     Class<?>[] groups() default {};
-    String[] validValues() default {};
+    String[] genderValues() default {};
     Class<? extends Payload>[] payload() default {};
 }

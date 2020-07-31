@@ -2,19 +2,22 @@ package com.thoughtworks.springbootemployee.validator;
 
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
+import java.util.Arrays;
+import java.util.stream.Collectors;
 
 public class GenderValidator implements ConstraintValidator<GenderValidation, String> {
 
-    String[] validString;
+    String[] genderValues;
 
     @Override
     public void initialize(GenderValidation constraintAnnotation) {
-        validString = constraintAnnotation.validValues();
+        constraintAnnotation.message();
+        genderValues = constraintAnnotation.genderValues();
     }
 
     @Override
     public boolean isValid(String value, ConstraintValidatorContext context) {
-       // validString
-        return "male".equals(value) || "female".equals(value);
+        return Arrays.stream(genderValues).collect(Collectors.toList()).contains(value);
+
     }
 }
