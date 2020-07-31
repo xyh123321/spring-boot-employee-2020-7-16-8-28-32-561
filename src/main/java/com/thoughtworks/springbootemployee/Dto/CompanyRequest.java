@@ -1,7 +1,16 @@
 package com.thoughtworks.springbootemployee.Dto;
 
+import org.springframework.beans.BeanUtils;
+import org.springframework.validation.annotation.Validated;
+
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
+
+@Validated
 public class CompanyRequest {
     int id;
+    @NotBlank
+    @Size(min = 1, max = 20)
     String name;
 
     public int getId() {
@@ -26,5 +35,6 @@ public class CompanyRequest {
     }
 
     public CompanyRequest() {
+
     }
 }
