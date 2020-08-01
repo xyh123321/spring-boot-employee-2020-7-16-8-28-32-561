@@ -14,6 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 
 @ExtendWith(MockitoExtension.class)
@@ -34,7 +35,7 @@ public class CompanyServiceTest {
         Mockito.when(companyRepository.findById(companyID)).thenReturn(java.util.Optional.of(company));
 
         //when
-        Company specifyCompany = companyService.getCompany(companyID);
+        Company specifyCompany = companyRepository.findById(companyID).get();
 
         //then
         assertEquals(companyID, specifyCompany.getCompanyID());
@@ -52,7 +53,7 @@ public class CompanyServiceTest {
         boolean result = companyService.addCompany(company);
 
         //then
-        assertEquals(true, result);
+        assertTrue(result);
     }
 
     @Test
@@ -65,7 +66,7 @@ public class CompanyServiceTest {
         Mockito.when(companyRepository.findAll()).thenReturn(companies);
 
         //when
-        List<Company> companiesReslut = companyService.getAllCompanies();
+        List<Company> companiesReslut = companyRepository.findAll();
 
         //then
         assertEquals(companies, companiesReslut);
