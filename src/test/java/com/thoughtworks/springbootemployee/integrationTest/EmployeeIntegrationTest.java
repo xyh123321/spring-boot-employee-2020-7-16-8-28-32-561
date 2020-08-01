@@ -95,4 +95,10 @@ public class EmployeeIntegrationTest {
         mockMvc.perform(MockMvcRequestBuilders
                 .delete("/employees/"+id)).andExpect(status().isOk());
     }
+
+    @Test
+    void should_return_404_when_delete_employee_empty_employee_repo() throws Exception {
+        mockMvc.perform(MockMvcRequestBuilders
+                .delete("/employees/1")).andExpect(status().isNotFound());
+    }
 }
