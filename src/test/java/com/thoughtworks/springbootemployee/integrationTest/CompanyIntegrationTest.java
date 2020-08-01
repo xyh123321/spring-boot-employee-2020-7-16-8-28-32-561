@@ -52,4 +52,13 @@ public class CompanyIntegrationTest {
         assertEquals(1,companies.size());
     }
 
+    @Test
+    void should_return_ok_when_delete_companies_given_a_company_in_company_repo() throws Exception {
+        Company company = new Company();
+        company.setName("oo");
+        Company saveCompany = companyRepository.save(company);
+        int id = saveCompany.getCompanyID();
+        mockMvc.perform(MockMvcRequestBuilders
+                .delete("/companies/"+id)).andExpect(status().isOk());
+    }
 }
