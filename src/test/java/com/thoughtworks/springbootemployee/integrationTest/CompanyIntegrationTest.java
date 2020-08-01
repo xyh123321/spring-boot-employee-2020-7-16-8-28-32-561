@@ -14,6 +14,7 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
 import java.util.List;
+import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -22,8 +23,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @AutoConfigureMockMvc
 @Rollback
 public class CompanyIntegrationTest {
-    @Autowired
-    EmployeeRepository employeeRepository;
 
     @Autowired
     CompanyRepository companyRepository;
@@ -37,9 +36,9 @@ public class CompanyIntegrationTest {
                 .andExpect(status().isOk());
     }
 
-
     @Test
     void should_return_1_company_when_add_a_company() throws Exception {
+        companyRepository.deleteAll();
         String body = "{\n" +
                 "    \"name\": \"tw2242\"\n" +
                 "}";
@@ -66,5 +65,23 @@ public class CompanyIntegrationTest {
     void should_return_404_when_delete_companies_given_empty_company_repo() throws Exception {
         mockMvc.perform(MockMvcRequestBuilders
                 .delete("/companies/10")).andExpect(status().isNotFound());
+    }
+
+    @Test
+    void should_return_new_column_when_update_company_given_a_company_in_company_repo() throws Exception {
+        Company company = new Company();
+        company.setName("oo");
+        Company saveCompany = companyRepository.save(company);
+        int id = saveCompany.getCompanyID();
+        String body = "{\n" +
+                "    \"companyID\":"+id+",\n" +
+                "    \"name\": \"cl\"\n" +
+                "}";
+        mockMvc.perform(MockMvcRequestBuilders
+                .put("/companies")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(body));
+        Optional<Company> updateCompany = companyRepository.findById(id);
+        assertEquals("cl",updateCompany.get().getName());
     }
 }
