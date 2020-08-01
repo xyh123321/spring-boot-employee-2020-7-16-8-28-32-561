@@ -21,7 +21,6 @@ public class GlobalException {
     @ExceptionHandler(ConstraintViolationException.class)
     public @ResponseBody
     String ConstraintViolationException(ConstraintViolationException e){
-        return e.getMessage();
-//        return e.getConstraintViolations().stream().findFirst().get().getMessage();
+        return e.getConstraintViolations().stream().findFirst().get().getMessage();
     }
 }
