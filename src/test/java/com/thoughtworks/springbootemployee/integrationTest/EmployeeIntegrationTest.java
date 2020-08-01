@@ -15,10 +15,12 @@ import org.springframework.context.annotation.Profile;
 import org.springframework.http.MediaType;
 import org.springframework.test.annotation.Rollback;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.ResultActions;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -102,5 +104,26 @@ public class EmployeeIntegrationTest {
                 .delete("/employees/1")).andExpect(status().isNotFound());
     }
 
+    @Test
+    void should_return_new_column_when_update_employee_given_a_employee_in_employee_repo() throws Exception {
+        Employee employee = new Employee();
+        employee.setName("test");
+        employee.setGender("male");
+        employee.setAge(12);
+        Employee saveEmployee = employeeRepository.save(employee);
+        int id = saveEmployee.getId();
+        String body = "{\n" +
+                "    \"id\":"+id+",\n" +
+                "    \"name\":\"test\",\n" +
+                "    \"gender\":\"female\",\n" +
+                "    \"age\":10\n" +
+                "}";
+        mockMvc.perform(MockMvcRequestBuilders
+                .put("/employees")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(body));
+        Optional<Employee> updateEmployee = employeeRepository.findById(id);
+        assertEquals(10,updateEmployee.get().getAge());
+    }
 
 }
