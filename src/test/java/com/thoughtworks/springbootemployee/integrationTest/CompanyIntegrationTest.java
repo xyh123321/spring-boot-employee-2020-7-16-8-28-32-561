@@ -61,4 +61,10 @@ public class CompanyIntegrationTest {
         mockMvc.perform(MockMvcRequestBuilders
                 .delete("/companies/"+id)).andExpect(status().isOk());
     }
+
+    @Test
+    void should_return_404_when_delete_companies_given_empty_company_repo() throws Exception {
+        mockMvc.perform(MockMvcRequestBuilders
+                .delete("/companies/10")).andExpect(status().isNotFound());
+    }
 }
