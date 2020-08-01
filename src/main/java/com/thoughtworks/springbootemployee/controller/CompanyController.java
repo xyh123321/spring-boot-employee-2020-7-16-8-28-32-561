@@ -18,14 +18,10 @@ public class CompanyController {
     @Autowired
     private CompanyServiceImpl companyService;
 
-//    @GetMapping("/companies/{id}")
-//    private Company getCompany(@PathVariable("id") int id) {
-//        return companyService.getCompany(id);
-//    }
 
     @GetMapping("/companies/{id}")
-    private CompanyResponse getCompany2(@PathVariable("id") int id) {
-        return companyService.getCompany2(id);
+    private CompanyResponse getCompany(@PathVariable("id") int id) {
+        return companyService.getCompany(id);
     }
 
     @GetMapping("/companies/{id}/employees")

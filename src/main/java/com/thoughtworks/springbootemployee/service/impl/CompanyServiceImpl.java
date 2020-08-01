@@ -33,12 +33,7 @@ public class CompanyServiceImpl implements CompanyService {
     }
 
     @Override
-    public Company getCompany(int id) {
-        return companyRepository.findById(id).orElseThrow(CompanyNotFoundException::new);
-    }
-
-    @Override
-    public CompanyResponse getCompany2(int id) {
+    public CompanyResponse getCompany(int id) {
         Company company = companyRepository.findById(id).orElseThrow(CompanyNotFoundException::new);
         CompanyResponse companyResponse = new CompanyResponse();
         companyResponse.setName(company.getName());
@@ -48,7 +43,7 @@ public class CompanyServiceImpl implements CompanyService {
 
     @Override
     public List<Employee> getAllEmployeesOfCompany(int id) {
-        Company company = getCompany(id);
+        Company company = companyRepository.findById(id).orElseThrow(CompanyNotFoundException::new);
         return company.getEmployeeList();
     }
 
@@ -65,7 +60,7 @@ public class CompanyServiceImpl implements CompanyService {
 
     @Override
     public void deleteTheCompanyAllInfo(int id) {
-        Company company = getCompany(id);
+        Company company = companyRepository.findById(id).orElseThrow(CompanyNotFoundException::new);
         employeeRepository.findAll().stream()
                 .filter(employee -> employee.getCompany().getCompanyID()==company.getCompanyID())
                 .forEach(employee -> employee.setCompany(null));

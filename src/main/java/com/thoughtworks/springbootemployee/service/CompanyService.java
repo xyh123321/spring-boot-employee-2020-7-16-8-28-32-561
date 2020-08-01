@@ -12,8 +12,7 @@ public interface CompanyService {
 
     List<Company> getAllCompanies();
 
-    Company getCompany(int id);
-    CompanyResponse getCompany2(int id);
+    CompanyResponse getCompany(int id);
 
     List<Employee> getAllEmployeesOfCompany(int id);
 
