@@ -10,13 +10,13 @@ import java.util.List;
 
 public interface CompanyService {
 
-    List<Company> getAllCompanies();
+    List<CompanyResponse> getAllCompanies();
 
     CompanyResponse getCompany(int id);
 
     List<Employee> getAllEmployeesOfCompany(int id);
 
-    List<Company> pagingQueryCompanies(Pageable pageable);
+    List<CompanyResponse> pagingQueryCompanies(Pageable pageable);
 
     boolean addCompany(Company company);
 

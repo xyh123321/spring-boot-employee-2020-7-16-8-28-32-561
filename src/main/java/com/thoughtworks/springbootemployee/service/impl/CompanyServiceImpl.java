@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -28,8 +29,16 @@ public class CompanyServiceImpl implements CompanyService {
     }
 
     @Override
-    public List<Company> getAllCompanies() {
-        return companyRepository.findAll();
+    public List<CompanyResponse> getAllCompanies() {
+        List<Company> companies= companyRepository.findAll();
+        List<CompanyResponse> companyResponses = new ArrayList<>();
+        for (Company company: companies) {
+            CompanyResponse companyResponse = new CompanyResponse();
+            companyResponse.setName(company.getName());
+            companyResponse.setStaffNum(company.getEmployeeList().size());
+            companyResponses.add(companyResponse);
+        }
+        return companyResponses;
     }
 
     @Override
@@ -48,8 +57,16 @@ public class CompanyServiceImpl implements CompanyService {
     }
 
     @Override
-    public List<Company> pagingQueryCompanies(Pageable pageable) {
-        return companyRepository.findAll(pageable).getContent();
+    public List<CompanyResponse> pagingQueryCompanies(Pageable pageable) {
+        List<Company> companies= companyRepository.findAll(pageable).getContent();
+        List<CompanyResponse> companyResponses = new ArrayList<>();
+        for (Company company: companies) {
+            CompanyResponse companyResponse = new CompanyResponse();
+            companyResponse.setName(company.getName());
+            companyResponse.setStaffNum(company.getEmployeeList().size());
+            companyResponses.add(companyResponse);
+        }
+        return companyResponses;
     }
 
     @Override
