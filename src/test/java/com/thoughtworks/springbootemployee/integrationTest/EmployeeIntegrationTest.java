@@ -85,7 +85,7 @@ public class EmployeeIntegrationTest {
     }
 
     @Test
-    void should_return_ok_when_delete_employee_a_employee_in_employee_repo() throws Exception {
+    void should_return_ok_when_delete_employee_given_a_employee_in_employee_repo() throws Exception {
         Employee employee = new Employee();
         employee.setName("test");
         employee.setGender("male");
@@ -97,8 +97,10 @@ public class EmployeeIntegrationTest {
     }
 
     @Test
-    void should_return_404_when_delete_employee_empty_employee_repo() throws Exception {
+    void should_return_404_when_delete_employee_given_empty_employee_repo() throws Exception {
         mockMvc.perform(MockMvcRequestBuilders
                 .delete("/employees/1")).andExpect(status().isNotFound());
     }
+
+
 }
