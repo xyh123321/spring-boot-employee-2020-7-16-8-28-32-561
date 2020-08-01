@@ -54,7 +54,8 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
 
     public void deleteEmployees(int id) {
-        employeeRepository.deleteById(id);
+        Employee employee = employeeRepository.findById(id).orElseThrow(EmployeeNotFoundException::new);
+        employeeRepository.delete(employee);
     }
 
     public List<Employee> getMaleEmployees(String gender) {
