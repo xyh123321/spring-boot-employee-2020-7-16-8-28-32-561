@@ -13,6 +13,7 @@ import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMock
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.annotation.Profile;
 import org.springframework.http.MediaType;
+import org.springframework.test.annotation.Rollback;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
@@ -24,6 +25,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @SpringBootTest
 @AutoConfigureMockMvc
+@Rollback
 public class EmployeeIntegrationTest {
 
     @Autowired
@@ -35,11 +37,11 @@ public class EmployeeIntegrationTest {
     @Autowired
     MockMvc mockMvc;
 
-    @AfterEach
-    void teardown(){
-        employeeRepository.deleteAll();
-        companyRepository.deleteAll();
-    }
+//    @AfterEach
+//    void teardown(){
+//        employeeRepository.deleteAll();
+//        companyRepository.deleteAll();
+//    }
 
     @Test
     void should_return_all_employees_when_get_all_employees() throws Exception {
@@ -68,6 +70,7 @@ public class EmployeeIntegrationTest {
 
     @Test
     void should_return_404_when_add_employee() throws Exception {
+        companyRepository.deleteAll();
         String body = " {\n" +
                 "                \"name\": \"chengcheng2222\",\n" +
                 "                \"gender\": \"male\",\n" +
@@ -82,12 +85,14 @@ public class EmployeeIntegrationTest {
     }
 
     @Test
-    void should() {
-        //given
-
-        //when
-
-        //then
-
+    void should_return_ok_when_delete_employee_a_employee_in_employee_repo() throws Exception {
+        Employee employee = new Employee();
+        employee.setName("test");
+        employee.setGender("male");
+        employee.setAge(12);
+        Employee saveEmployee = employeeRepository.save(employee);
+        int id = saveEmployee.getId();
+        mockMvc.perform(MockMvcRequestBuilders
+                .delete("/employees/"+id)).andExpect(status().isOk());
     }
 }
