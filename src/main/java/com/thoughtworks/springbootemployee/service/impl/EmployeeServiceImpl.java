@@ -62,7 +62,8 @@ public class EmployeeServiceImpl implements EmployeeService {
         return employeeRepository.findByGender(gender);
     }
 
-    public void updateEmployees(Employee employee) {
+    public void updateEmployees(int id,Employee employee) {
+        employee.setId(id);
         employeeRepository.save(employee);
     }
 

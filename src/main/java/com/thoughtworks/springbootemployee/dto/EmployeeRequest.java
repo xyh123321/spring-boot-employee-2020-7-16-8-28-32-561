@@ -1,15 +1,15 @@
 package com.thoughtworks.springbootemployee.dto;
 
-public class EmployeesRequest {
+public class EmployeeRequest {
     private String name;
     private String gender;
     private int age;
     private int companyId;
 
-    public EmployeesRequest() {
+    public EmployeeRequest() {
     }
 
-    public EmployeesRequest(String name, String gender, int age, int companyId) {
+    public EmployeeRequest(String name, String gender, int age, int companyId) {
         this.name = name;
         this.gender = gender;
         this.age = age;

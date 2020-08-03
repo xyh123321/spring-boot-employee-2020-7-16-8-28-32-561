@@ -110,13 +110,12 @@ public class EmployeeIntegrationTest {
         Employee saveEmployee = employeeRepository.save(employee);
         int id = saveEmployee.getId();
         String body = "{\n" +
-                "    \"id\":"+id+",\n" +
                 "    \"name\":\"test\",\n" +
                 "    \"gender\":\"female\",\n" +
                 "    \"age\":10\n" +
                 "}";
         mockMvc.perform(MockMvcRequestBuilders
-                .put("/employees")
+                .put("/employees/"+id)
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(body));
         Optional<Employee> updateEmployee = employeeRepository.findById(id);
