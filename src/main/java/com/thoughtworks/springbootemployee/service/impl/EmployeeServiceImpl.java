@@ -1,7 +1,7 @@
 package com.thoughtworks.springbootemployee.service.impl;
 
 import com.thoughtworks.springbootemployee.dto.EmployeeResponse;
-import com.thoughtworks.springbootemployee.dto.EmployeesRequest;
+import com.thoughtworks.springbootemployee.dto.EmployeeRequest;
 import com.thoughtworks.springbootemployee.entity.Company;
 import com.thoughtworks.springbootemployee.entity.Employee;
 import com.thoughtworks.springbootemployee.exception.CompanyNotFoundException;
@@ -36,12 +36,12 @@ public class EmployeeServiceImpl implements EmployeeService {
         return employeeRepository.findById(id).orElseThrow(EmployeeNotFoundException::new);
     }
 
-    public EmployeeResponse addEmployees(EmployeesRequest employeesRequest) {
-        Company company = companyRepository.findById(employeesRequest.getCompanyId()).orElseThrow(CompanyNotFoundException::new);
+    public EmployeeResponse addEmployees(EmployeeRequest employeeRequest) {
+        Company company = companyRepository.findById(employeeRequest.getCompanyId()).orElseThrow(CompanyNotFoundException::new);
         Employee employee = new Employee();
-        employee.setName(employeesRequest.getName());
-        employee.setAge(employeesRequest.getAge());
-        employee.setGender(employeesRequest.getGender());
+        employee.setName(employeeRequest.getName());
+        employee.setAge(employeeRequest.getAge());
+        employee.setGender(employeeRequest.getGender());
         employee.setCompany(company);
 
         Employee employeeSaved = employeeRepository.save(employee);

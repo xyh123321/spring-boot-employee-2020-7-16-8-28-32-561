@@ -1,7 +1,7 @@
 package com.thoughtworks.springbootemployee;
 
 import com.thoughtworks.springbootemployee.dto.EmployeeResponse;
-import com.thoughtworks.springbootemployee.dto.EmployeesRequest;
+import com.thoughtworks.springbootemployee.dto.EmployeeRequest;
 import com.thoughtworks.springbootemployee.entity.Company;
 import com.thoughtworks.springbootemployee.entity.Employee;
 import com.thoughtworks.springbootemployee.repository.CompanyRepository;
@@ -35,7 +35,7 @@ public class EmployeeServiceTest {
     void should_return_reponse_employee_when_add_employee_given_request_employee() {
         //given
         int companyId = 1;
-        EmployeesRequest employeesRequest = new EmployeesRequest("employee 1","male",18,companyId);
+        EmployeeRequest employeeRequest = new EmployeeRequest("employee 1","male",18,companyId);
         Company company = new Company();
         company.setCompanyID(companyId);
         company.setName("oocl");
@@ -46,7 +46,7 @@ public class EmployeeServiceTest {
         when(employeeRepository.save(any())).thenReturn(employee);
 
         //when
-        EmployeeResponse employeeResponseSaved = employeeService.addEmployees(employeesRequest);
+        EmployeeResponse employeeResponseSaved = employeeService.addEmployees(employeeRequest);
 
         //then
         assertEquals(employeeResponse.toString(), employeeResponseSaved.toString());

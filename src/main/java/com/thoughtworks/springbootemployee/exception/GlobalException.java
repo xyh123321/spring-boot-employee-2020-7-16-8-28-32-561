@@ -14,7 +14,6 @@ public class GlobalException {
     @ResponseStatus(HttpStatus.NOT_FOUND)
     @ExceptionHandler(CompanyNotFoundException.class)
     void companyNotFoundException() {
-
     }
 
     @ResponseStatus(HttpStatus.BAD_REQUEST)
