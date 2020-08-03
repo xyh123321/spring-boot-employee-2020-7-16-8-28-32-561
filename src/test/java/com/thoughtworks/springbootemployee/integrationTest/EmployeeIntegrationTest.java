@@ -93,6 +93,8 @@ public class EmployeeIntegrationTest {
         int id = saveEmployee.getId();
         mockMvc.perform(MockMvcRequestBuilders
                 .delete("/employees/"+id)).andExpect(status().isOk());
+        mockMvc.perform(MockMvcRequestBuilders
+                .get("/employees/"+id)).andExpect(status().isNotFound());
     }
 
     @Test
